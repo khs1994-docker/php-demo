@@ -12,6 +12,8 @@
 
 * IDE `PHPStorm`
 
+* git 分支 `dev`
+
 ### 1. 新建 PHP 项目
 
 并初始化 git 仓库。
@@ -134,9 +136,9 @@ $ git push origin dev:dev
 
 ## git 添加 tag
 
-只有添加了 `tag` 的代码才能部署
+只有添加了 `tag` 的代码才能部署到生产环境
 
-Docker 镜像名包含 git `tag`
+Docker 镜像名必须包含 git `tag`
 
 CI/CD 服务器构建并推送镜像到 Docker 仓库。
 

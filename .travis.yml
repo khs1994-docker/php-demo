@@ -19,11 +19,13 @@ php:
 
 jobs:
   include:
-    - script: composer self-update && composer install -q && composer update -q && vendor/bin/phpunit
+    - script: composer install -q && composer update -q && vendor/bin/phpunit
     - stage: deploy
       script: " if ! [ -z \"${TRAVIS_TAG}\" ];then
+      echo \"${TRAVIS_TAG}\" ;
       docker build -t khs1994/php-fpm:swarm-7.2.3-alpine3.7-${TRAVIS_TAG} --target=php . ;
       docker build -t khs1994/nginx:swarm-1.13.9-alpine-${TRAVIS_TAG} . ;
+      docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ;
       docker push khs1994/php-fpm:swarm-7.2.3-alpine3.7-${TRAVIS_TAG} ;
       docker push khs1994/nginx:swarm-1.13.9-alpine-${TRAVIS_TAG} ;
       else

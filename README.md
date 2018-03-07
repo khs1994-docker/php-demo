@@ -14,17 +14,27 @@
 
 ### 1. 新建 PHP 项目
 
+并初始化 git 仓库。
+
 ```bash
 $ cd lnmp
 
 $ mkdir -p app/demo
+
+$ cd app/demo
+
+$ git init
+
+$ git remote add origin git@github.com:username/repo.git
+
+$ git checkout -b dev
 
 $ echo -e "<?php\nphpinfo();" >> app/demo/index.php
 ```
 
 ### 2. 新增 NGINX 配置
 
-参考示例配置文件在 `config/nginx` 新建 `php.conf` NGINX 配置文件
+参考示例配置文件在 `config/nginx` 新建 `*.conf` NGINX 配置文件
 
 ### 3. 启动 khs1994-docker/lnmp
 
@@ -63,10 +73,6 @@ $ lnmp-composer require phpunit/phpunit
 
 ### 11. 使用 PHPUnit 测试
 
-### 12. NGINX 配置文件说明
-
-> 测试环境用不到 NGINX？
-
 #### 使用 PHPStorm
 
 `PHPStorm 设置`-> `Languages & ...` -> `PHP` ->`Test Frameworks` -> `左上角添加`
@@ -99,20 +105,20 @@ $ docker-compose build
 ### 13. 将项目提交到 Git
 
 ```bash
-$ git init
-
 $ git add .
 
 $ git commit -m "First"
 
-$ git remote add origin GIT_URL
-
-$ git push origin master
+$ git push origin dev:dev
 ```
 
 ## CI/CD 服务搭建
 
 `khs1994.com` CI/CD 由 [khs1994-docker/ci](https://github.com/khs1994-docker/ci) 提供。
+
+`Drone + Gogs` 暂不支持挂载本地 `Volume`
+
+本例 CI/CD 由 `Travis` 提供。
 
 ## 测试（全自动）
 
@@ -132,19 +138,15 @@ $ git push origin master
 
 Docker 镜像名包含 git `tag`
 
+CI/CD 服务器构建并推送镜像到 Docker 仓库。
+
 ## 部署 (全自动)
 
 生产环境部署 [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp) 请查看 https://github.com/khs1994-docker/lnmp/tree/master/docs/production
 
-### 1. CI/CD 服务器构建 Docker 镜像
+### 1. Docker 私有仓库通知到指定地址
 
-### 2. CI/CD 服务器推送 Docker 镜像到私有 Docker 仓库
-
-### 3. Docker 私有仓库通知到指定地址
-
-### 4. Swarm mode 或 k8s 集群自动更新服务
-
-调用响应的 API
+### 2. Swarm mode 或 k8s 集群调用相应的 API 自动更新服务
 
 #### Swarm mode
 
@@ -185,4 +187,6 @@ $ docker service update --image khs1994/nginx:swarm-alpine-NEW_GIT_TAG lnmp_ngin
 $ docker service update --help
 ```
 
-### 5. 完成部署
+#### k8s
+
+### 3. 完成部署

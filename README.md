@@ -4,13 +4,15 @@
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
 
-## 开发
+## 一、开发
 
 ### 环境
 
 * LNMP [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp)
 
 * IDE `PHPStorm`
+
+* git 分支 `dev`
 
 ### 1. 新建 PHP 项目
 
@@ -120,7 +122,7 @@ $ git push origin dev:dev
 
 本例 CI/CD 由 `Travis` 提供。
 
-## 测试（全自动）
+## 二、测试（全自动）
 
 ### 1. Git 通知到 CI/CD 服务器
 
@@ -130,17 +132,17 @@ $ git push origin dev:dev
 
 ### 2. CI/CD 服务器测试
 
-## 开发、测试循环
+## 三、开发、测试循环
 
 ## git 添加 tag
 
-只有添加了 `tag` 的代码才能部署
+* 只有添加了 `tag` 的代码才能部署到生产环境
 
-Docker 镜像名包含 git `tag`
+* Docker 镜像名必须包含 git `tag`
 
-CI/CD 服务器构建并推送镜像到 Docker 仓库。
+* CI/CD 服务器构建并推送镜像到 Docker 仓库。
 
-## 部署 (全自动)
+## 四、部署 (全自动)
 
 生产环境部署 [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp) 请查看 https://github.com/khs1994-docker/lnmp/tree/master/docs/production
 

@@ -40,7 +40,7 @@ FROM khs1994/php-fpm:${PHP_VERSION} as php
 
 COPY --from=composer /app /app
 
-CMD ["php-fpm", "-R", "-d", "variables_order='EGPCS'"]
+CMD ["php-fpm", "-R", "-F"]
 
 #
 # $ docker build -t khs1994/php-fpm:swarm-7.2.3-alpine3.7-GIT_TAG --target=php .

@@ -156,8 +156,18 @@ $ git push origin dev:dev
 #
 # 管理员通过 API 新增配置文件、密钥, 并更新
 #
+# @link https://docs.docker.com/engine/swarm/configs/
+#
+# @link https://docs.docker.com/engine/swarm/secrets/
+#
+# @link https://docs.docker.com/edge/engine/reference/commandline/service_update/
+#
 
-$ docker config create nginx_khs1994_com_conf_vN config/nginx/khs1994.com.conf
+$ docker config create nginx_khs1994_com_conf_v2 config/nginx/khs1994.com.conf
+
+# 从 git 源文件创建 configs
+
+$ curl https://raw.githubusercontent.com/khs1994-docker/php-demo/d77eee54be1c023bc3e9dc1a025bde02471f1b5e/nginx/khs1994.com.conf | docker config create nginx_khs1994_com_conf_v2 -
 
 #
 # 更新配置的时候也可以同时更新镜像
@@ -165,15 +175,17 @@ $ docker config create nginx_khs1994_com_conf_vN config/nginx/khs1994.com.conf
 
 $ docker service update \
     --config-rm nginx_khs1994_com_conf \
-    --config-add source=nginx_khs1994_com_conf_vN,target=/etc/nginx/conf.d/khs1994.com.conf \
+    --config-add source=nginx_khs1994_com_conf_v2,target=/etc/nginx/conf.d/khs1994.com.conf \
     --image khs1994/nginx:swarm-alpine-NEW_GIT_TAG lnmp_nginx \
     lnmp_nginx
 
-$ docker secret create khs1994_com_ssl_crt_vN config/nginx/ssl/khs1994.com.crt
+$ docker secret create khs1994_com_ssl_crt_v2 config/nginx/ssl/khs1994.com.crt
+
+# 从 git 源文件创建 secrets，省略
 
 $ docker service update \
     --secret-rm khs1994_com_ssl_crt \
-    --secret-add source=khs1994_com_ssl_crt_vN,target=/etc/nginx/conf.d/ssl/khs1994.com.crt \
+    --secret-add source=khs1994_com_ssl_crt_v2,target=/etc/nginx/conf.d/ssl/khs1994.com.crt \
     lnmp_nginx
 
 #

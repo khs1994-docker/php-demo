@@ -169,7 +169,7 @@ matrix:
   MONGODB_VERSION:
     - 3.7.2
   POSTGRESQL_VERSION:
-    - 10.3
+    - 10.3-alpine
 
 # branches:
 #   include: [ master, dev, feature/* ]

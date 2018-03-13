@@ -13,6 +13,7 @@
 .scrutinizer.yml export-ignore
 /docker-compose.yml export-ignore
 /Dockerfile export-ignore
+/test.Dockerfile export-ignore
 /phpunit.xml export-ignore
 /CHANGELOG.md export-ignore
 /CONTRIBUTING.md export-ignore

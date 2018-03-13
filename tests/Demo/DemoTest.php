@@ -1,5 +1,7 @@
 <?php
 
+namespace Demo\Tests;
+
 use PHPUnit\Framework\TestCase;
 
 class DemoTest extends TestCase

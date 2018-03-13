@@ -4,6 +4,16 @@
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
 
+## 准备
+
+建立一个自己的 PHP 项目模板（即 `composer` 包类型为 `project`),里面包含了常用的文件的模板。
+
+示例：https://github.com/khs1994-php/example
+
+将 Docker 化的常用命令所在文件夹加入 `PATH`
+
+**务必执行此项操作** 具体请查看 [这里](https://github.com/khs1994-docker/lnmp/tree/master/bin)。
+
 ## 一、开发
 
 ### 环境
@@ -16,14 +26,14 @@
 
 ### 1. 新建 PHP 项目
 
-并初始化 git 仓库。
+使用自己的模板项目初始化 `PHP` 项目并初始化 git 仓库。
 
 ```bash
-$ cd lnmp
+$ cd lnmp/app
 
-$ mkdir -p app/demo
+$ lnmp-composer create-project --prefer-dist khs1994/example example @dev
 
-$ cd app/demo
+$ cd example
 
 $ git init
 
@@ -31,7 +41,7 @@ $ git remote add origin git@github.com:username/repo.git
 
 $ git checkout -b dev
 
-$ echo -e "<?php\nphpinfo();" >> app/demo/index.php
+$ echo -e "<?php\nphpinfo();" >> index.php
 ```
 
 ### 2. 新增 NGINX 配置
@@ -156,8 +166,18 @@ $ git push origin dev:dev
 #
 # 管理员通过 API 新增配置文件、密钥, 并更新
 #
+# @link https://docs.docker.com/engine/swarm/configs/
+#
+# @link https://docs.docker.com/engine/swarm/secrets/
+#
+# @link https://docs.docker.com/edge/engine/reference/commandline/service_update/
+#
 
-$ docker config create nginx_khs1994_com_conf_vN config/nginx/khs1994.com.conf
+$ docker config create nginx_khs1994_com_conf_v2 config/nginx/khs1994.com.conf
+
+# 从 git 源文件创建 configs
+
+$ curl https://raw.githubusercontent.com/khs1994-docker/php-demo/d77eee54be1c023bc3e9dc1a025bde02471f1b5e/nginx/khs1994.com.conf | docker config create nginx_khs1994_com_conf_v2 -
 
 #
 # 更新配置的时候也可以同时更新镜像
@@ -165,15 +185,17 @@ $ docker config create nginx_khs1994_com_conf_vN config/nginx/khs1994.com.conf
 
 $ docker service update \
     --config-rm nginx_khs1994_com_conf \
-    --config-add source=nginx_khs1994_com_conf_vN,target=/etc/nginx/conf.d/khs1994.com.conf \
+    --config-add source=nginx_khs1994_com_conf_v2,target=/etc/nginx/conf.d/khs1994.com.conf \
     --image khs1994/nginx:swarm-alpine-NEW_GIT_TAG lnmp_nginx \
     lnmp_nginx
 
-$ docker secret create khs1994_com_ssl_crt_vN config/nginx/ssl/khs1994.com.crt
+$ docker secret create khs1994_com_ssl_crt_v2 config/nginx/ssl/khs1994.com.crt
+
+# 从 git 源文件创建 secrets，省略
 
 $ docker service update \
     --secret-rm khs1994_com_ssl_crt \
-    --secret-add source=khs1994_com_ssl_crt_vN,target=/etc/nginx/conf.d/ssl/khs1994.com.crt \
+    --secret-add source=khs1994_com_ssl_crt_v2,target=/etc/nginx/conf.d/ssl/khs1994.com.crt \
     lnmp_nginx
 
 #

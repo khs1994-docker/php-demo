@@ -31,11 +31,29 @@ pipeline:
   #
   # CI/CD 构建预上线环境 PHP NGINX 镜像
   #
-  publish:
+  publish_php:
     image: plugins/docker
     registry: docker.khs1994.com
     repo: khs1994/php-fpm
     tags: swarm-7.2.3-alpine3.7-${DRONE_TAG}
+    target: php
+    when:
+      #
+      # 手动在命令行执行以下命令才会执行 publish
+      #
+      # $ drone deploy khs1994-php/demo 24 staging
+      #
+      #
+      event: deployment
+      environment: staging
+    secrets: [ docker_usernmae, docker_password ]
+
+  publish_nginx:
+    image: plugins/docker
+    registry: docker.khs1994.com
+    repo: khs1994/nginx
+    tags: swarm-1.13.9-alpine-${DRONE_TAG}
+    target: nginx
     when:
       #
       # 手动在命令行执行以下命令才会执行 publish
@@ -50,11 +68,29 @@ pipeline:
   #
   # CI/CD 构建生产环境 PHP NGINX 镜像
   #
-  publish_to_prod:
+  publish_php_to_prod:
     image: plugins/docker
     registry: docker.khs1994.com
     repo: khs1994/php-fpm
     tags: swarm-7.2.3-alpine3.7-${DRONE_TAG}
+    target: php
+    when:
+      #
+      # 手动在命令行执行以下命令才会执行 publish
+      #
+      # $ drone deploy khs1994-php/demo 24 production
+      #
+      #
+      event: deployment
+      environment: production
+    secrets: [ docker_usernmae, docker_password ]
+
+  publish_nginx_to_prod:
+    image: plugins/docker
+    registry: docker.khs1994.com
+    repo: khs1994/nginx
+    tags: swarm-1.13.9-alpine-${DRONE_TAG}
+    target: nginx
     when:
       #
       # 手动在命令行执行以下命令才会执行 publish

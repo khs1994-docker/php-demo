@@ -4,6 +4,16 @@
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
 
+## 准备
+
+建立一个自己的 PHP 项目模板（即 `composer` 包类型为 `project`),里面包含了常用的文件的模板。
+
+示例：https://github.com/khs1994-php/example
+
+将 Docker 化的常用命令所在文件夹加入 `PATH`
+
+**务必执行此项操作** 具体请查看 [这里](https://github.com/khs1994-docker/lnmp/tree/master/bin)。
+
 ## 一、开发
 
 ### 环境
@@ -16,14 +26,14 @@
 
 ### 1. 新建 PHP 项目
 
-并初始化 git 仓库。
+使用自己的模板项目初始化 `PHP` 项目并初始化 git 仓库。
 
 ```bash
-$ cd lnmp
+$ cd lnmp/app
 
-$ mkdir -p app/demo
+$ lnmp-composer create-project --prefer-dist khs1994/example example @dev
 
-$ cd app/demo
+$ cd example
 
 $ git init
 
@@ -31,7 +41,7 @@ $ git remote add origin git@github.com:username/repo.git
 
 $ git checkout -b dev
 
-$ echo -e "<?php\nphpinfo();" >> app/demo/index.php
+$ echo -e "<?php\nphpinfo();" >> index.php
 ```
 
 ### 2. 新增 NGINX 配置

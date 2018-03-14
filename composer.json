@@ -60,6 +60,7 @@
     "z-example": [
       "cp README.example.md README.md",
       "cp .gitattributes.example .gitattributes",
+      "rm -rf *.php *.html",
       "echo \"\\n\\nPlease Exec $ rm -rf .*.example *.example.md\\n\\n\""
     ],
     "z-travis": [
@@ -80,7 +81,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "18.03-dev"
+      "dev-master": "18.05-dev"
     }
   }
 }

@@ -7,14 +7,16 @@ $ composer create-project --prefer-dist khs1994/example example @dev
 
 $ cd example
 
-# init
+# init 加 z- 前缀方便将自定义命令列在最后
 
 $ composer z-example
 ```
 
 # Docker 化 PHP 项目最佳实践
 
-完全使用 Docker 开发、部署 PHP 项目
+**Powered By khs1994-docker/lnmp**
+
+完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档]()
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
 
@@ -38,6 +40,8 @@ $ composer z-example
 
 * git 分支 `dev`
 
+* 假设系统中不包含任何 PHP 等程序（实际上为了防止 Docker 崩溃等意外情况，建议系统中仍然安装这些软件作为 PLAN B）
+
 ### 1. 新建 PHP 项目
 
 使用自己的模板项目初始化 `PHP` 项目并初始化 git 仓库。
@@ -51,7 +55,7 @@ $ cd example
 
 $ git init
 
-$ git remote add origin git@github.com:username/repo.git
+$ git remote add origin git@url.com:username/repo.git
 
 $ git checkout -b dev
 
@@ -59,6 +63,8 @@ $ echo -e "<?php\nphpinfo();" >> index.php
 ```
 
 ### 2. 新增 NGINX 配置
+
+一个 PHP 项目， 一个 网址，一个子配置文件
 
 参考示例配置文件在 `config/nginx` 新建 `*.conf` NGINX 配置文件
 
@@ -72,14 +78,32 @@ $ ./lnmp-docker.sh development
 
 浏览器打开页面，出现 php 信息
 
-### 5. PHPStorm 打开已有项目
+### 5. PHPStorm 打开 PHP 项目
+
+注意打开的是 PHP 项目，不是 `khs1994-docker/lnmp`！
+
+要编辑本项目建议使用 `ATOM`。
 
 ### 6. 设置 CLI
 
+>前提是已经启动了 Docker
+
 `PHPStorm 设置`-> `Languages & ...` -> `PHP` -> `CLI Interpreter` -> `点击后边三个点`
-     -> `左上角添加` -> `From Docker ...` -> `Remote` -> `选择 Docker`
+     -> `左上角添加` -> `From Docker ...` -> `选择 Docker`
      -> `Image name` -> `选择 khs1994/php-fpm:7.2.3-alpine3.7`
      -> `点击 OK 确认`
+
+点击 ok 之后跳转的页面上 `Additionl` -> `Debugger extension`-> `填写 xdebug`
+
+具体请查看 https://github.com/khs1994-docker/lnmp/issues/260#issuecomment-373964173
+
+再点击 ok 之后跳转到了 `PHPStorm 设置`-> `Languages & ...` -> `PHP` -> `CLI Interpreter` 这个页面
+
+点击 Docker container 后边三个点配置容器的参数（就像 docker run ... 命令行配置的参数一样）
+
+* Network mode `lnmp_backend` (非常重要)
+
+* 其他参数根据实际需要自行配置
 
 ### 7. 设置 Xdebug
 
@@ -107,16 +131,15 @@ $ lnmp-composer require phpunit/phpunit
               -> `Path to script` -> `填写 /opt/project/vendor/autoload.php`
               -> `点击右边刷新` -> `点击 OK 确认`
 
-
 在测试函数名单击右键 `run FunName` 开始测试。
 
 #### 使用命令行
 
 ```bash
-$ lnmp-phpunit
-```
+$ cd lnmp/app/PHP_PROJECT
 
-在笔记本需要与数据库交互的测试流程暂未发布。
+$ lnmp-phpunit [参数]
+```
 
 ### 12. 测试构建 PHP 及 NGINX 镜像
 
@@ -155,6 +178,8 @@ $ git push origin dev:dev
 * Drone (私有化 CI/CD)
 
 ### 2. CI/CD 服务器测试
+
+具体请搜索 `Travis` 学习如何使用。
 
 ## 三、开发、测试循环
 

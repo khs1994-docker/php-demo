@@ -48,34 +48,29 @@
     }
   },
   "scripts": {
-    "z-test": [
-      "vendor/bin/phpunit"
-    ],
     "z-chinese-mirror": [
       "@php -r \"echo PHP_EOL.PHP_EOL.'$ composer config -g repo.packagist composer https://packagist.phpcomposer.com'.PHP_EOL.PHP_EOL.PHP_EOL;\""
     ],
     "z-docker-mirror": [
-      "@php -r \"echo PHP_EOL.PHP_EOL.'$ { \"registry-mirrors\": [ \"https://registry.docker-cn.com\" ] }'.PHP_EOL.PHP_EOL.PHP_EOL;\""
-    ],
-    "z-example": [
-      "cp README.example.md README.md",
-      "cp .gitattributes.example .gitattributes",
-      "rm -rf *.php *.html",
-      "echo \"\\n\\nPlease Exec $ rm -rf .*.example *.example.md\\n\\n\""
+      "@php -r \"echo PHP_EOL.PHP_EOL.'{ \"registry-mirrors\": [ \"https://registry.docker-cn.com\" ] }'.PHP_EOL.PHP_EOL.PHP_EOL;\""
     ],
     "z-travis": [
-      "travis encrypt-file ~/.ssh/id_rsa --add"
+      "@php -r \"echo PHP_EOL.PHP_EOL.'travis encrypt-file ~/.ssh/id_rsa --add'.PHP_EOL.PHP_EOL;\""
     ],
     "z-encrypt": [
-      "echo \"\\n\\n$ openssl enc -aes-128-cbc -e -a -in FILE_PATH -out OUT_FILE_PATH -K c286696d887c9aa0611bbb3e2025a400 -iv 562e17996d093d28ddb3ba695a2e6f00\\n\\n\"",
-      "echo \"\\n\\n$ openssl enc -aes-128-cbc -d -a -in FILE_PATH -out OUT_FILE_PATH -K c286696d887c9aa0611bbb3e2025a400 -iv 562e17996d093d28ddb3ba695a2e6f00\\n\\n\""
+      "@php -r \"echo PHP_EOL.PHP_EOL.'$ openssl enc -aes-128-cbc -e -a -in FILE_PATH -out OUT_FILE_PATH -K c286696d887c9aa0611bbb3e2025a400 -iv 562e17996d093d28ddb3ba695a2e6f00'.PHP_EOL.PHP_EOL;\"",
+      "@php -r \"echo PHP_EOL.PHP_EOL.'$ openssl enc -aes-128-cbc -d -a -in FILE_PATH -out OUT_FILE_PATH -K c286696d887c9aa0611bbb3e2025a400 -iv 562e17996d093d28ddb3ba695a2e6f00';\""
+    ],
+    "post-create-project-cmd": [
+      "@php -r \"copy('README.example.md', 'README.md');\"",
+      "@php -r \"copy('.gitattributes.example', '.gitattributes');\"",
+      "@php -r \"unlink('index.php'); unlink('demo.html');\"",
+      "@php -r \"echo PHP_EOL.PHP_EOL.'Please Exec $ bash rm -rf .*.example *.example.md'.PHP_EOL.PHP_EOL;\""
     ]
   },
   "scripts-descriptions": {
-    "z-test": "[self defined] Run all tests!",
     "z-chinese-mirror": "[self defined] How to set chinese composer mirror",
     "z-docker-mirror": "[self defined] How to set chinese docker mirror",
-    "z-example": "[self defined] init example",
     "z-travis": "[self defined] How to encrypt travis file",
     "z-encrypt": "[self defined] How to encrypt file by openssl"
   },

@@ -1,8 +1,8 @@
 <?php
 
-namespace DirName\Tests;
+namespace Example\Tests;
 
-class DemoTest extends DirNameTests
+class DemoTest extends ExampleTestCase
 {
     public function demo()
     {

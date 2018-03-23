@@ -36,8 +36,8 @@ ARG PHP_VERSION_5_6_X=5.6.0
 
 FROM khs1994/php-fpm:${PHP_VERSION_7_2_X}-alpine3.7
 
-RUN git clone --recursive --depth=1 https://github.com/khs1994-php/REPO.git /root/khs1994-php/REPO \
-    && cd /root/khs1994-php/REPO \
+RUN git clone --recursive --depth=1 https://github.com/khs1994-php/EXAMPLE.git /root/khs1994-php/EXAMPLE \
+    && cd /root/khs1994-php/EXAMPLE \
     && composer install -q \
     && composer update -q \
     && vendor/bin/phpunit
@@ -48,9 +48,9 @@ RUN git clone --recursive --depth=1 https://github.com/khs1994-php/REPO.git /roo
 
 FROM khs1994/php-fpm:${PHP_VERSION_7_1_X}-alpine3.4
 
-COPY --from=0 /root/khs1994-php/REPO /root/khs1994-php/REPO
+COPY --from=0 /root/khs1994-php/EXAMPLE /root/khs1994-php/EXAMPLE
 
-RUN cd /root/khs1994-php/REPO \
+RUN cd /root/khs1994-php/EXAMPLE \
     && rm -rf vendor composer.lock \
     && composer install -q \
     && composer update -q \
@@ -62,9 +62,9 @@ RUN cd /root/khs1994-php/REPO \
 
 # FROM khs1994/php-fpm:${PHP_VERSION_7_0_X}-alpine3.4
 #
-# COPY --from=0 /root/khs1994-php/REPO /root/khs1994-php/REPO
+# COPY --from=0 /root/khs1994-php/EXAMPLE /root/khs1994-php/EXAMPLE
 #
-# RUN cd /root/khs1994-php/REPO \
+# RUN cd /root/khs1994-php/EXAMPLE \
 #       && rm -rf vendor composer.lock \
 #       && composer install -q \
 #       && composer update -q \
@@ -76,9 +76,9 @@ RUN cd /root/khs1994-php/REPO \
 
 # FROM khs1994/php-fpm:${PHP_VERSION_5_6_X}-alpine3.4
 #
-# COPY --from=0 /root/khs1994-php/REPO /root/khs1994-php/REPO
+# COPY --from=0 /root/khs1994-php/EXAMPLE /root/khs1994-php/EXAMPLE
 #
-# RUN cd /root/khs1994-php/REPO \
+# RUN cd /root/khs1994-php/EXAMPLE \
 #       && rm -rf vendor composer.lock \
 #       && composer install -q \
 #       && composer update -q \

@@ -18,9 +18,9 @@ ARG  NGINX_VERSION=1.13.9
 
 FROM khs1994/php-fpm:${PHP_VERSION} as composer
 
-COPY . /app/demo/
+COPY . /app/EXAMPLE/
 
-RUN cd /app/demo \
+RUN cd /app/EXAMPLE \
       #
       # 安装 composer 依赖
       #

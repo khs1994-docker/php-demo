@@ -6,6 +6,8 @@
 $ composer create-project --prefer-dist khs1994/example example @dev
 
 $ cd example
+
+# 文件夹内搜索 EXAMPLE 替换为项目名称
 ```
 
 # Docker 化 PHP 项目最佳实践

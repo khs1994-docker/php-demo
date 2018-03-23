@@ -39,12 +39,12 @@
   },
   "autoload": {
     "psr-4": {
-      "DirName\\": "src/DirName/"
+      "Example\\": "src/Example/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "DirName\\Tests\\": "tests/DirName/"
+      "Example\\Tests\\": "tests/Example/"
     }
   },
   "scripts": {

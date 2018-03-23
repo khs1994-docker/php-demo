@@ -2,7 +2,7 @@
 <phpunit>
     <testsuites>
         <testsuite>
-            <directory>tests/DirName</directory>
+            <directory>tests/Example</directory>
         </testsuite>
     </testsuites>
     <groups>

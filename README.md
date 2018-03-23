@@ -12,7 +12,7 @@ $ cd example
 
 **Powered By khs1994-docker/lnmp**
 
-完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档]()
+完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档](https://github.com/khs1994-docker/lnmp/tree/master/docs)
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
 

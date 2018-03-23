@@ -12,7 +12,6 @@
 .travis.yml export-ignore
 .scrutinizer.yml export-ignore
 /docker-compose.yml export-ignore
-/docker-test.yml export-ignore
 /docker-stack.yml export-ignore
 /Dockerfile export-ignore
 /test.Dockerfile export-ignore

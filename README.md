@@ -6,10 +6,6 @@
 $ composer create-project --prefer-dist khs1994/example example @dev
 
 $ cd example
-
-# init 加 z- 前缀方便将自定义命令列在最后
-
-$ composer z-example
 ```
 
 # Docker 化 PHP 项目最佳实践

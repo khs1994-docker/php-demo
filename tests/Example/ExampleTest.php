@@ -2,7 +2,7 @@
 
 namespace Example\Tests;
 
-class DemoTest extends ExampleTestCase
+class ExampleTest extends ExampleTestCase
 {
     public function demo()
     {

@@ -1,7 +1,7 @@
 # CHANGELOG
 
-## v18.03
+## v18.05.0
 
-* Support Drone CI Travis CI Style CI
+* Support CI Drone CI Travis CI Style CI
 
 * Support Docker PHP

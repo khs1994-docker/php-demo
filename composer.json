@@ -65,7 +65,7 @@
       "@php -r \"copy('README.example.md', 'README.md');\"",
       "@php -r \"copy('.gitattributes.example', '.gitattributes');\"",
       "@php -r \"unlink('index.php'); unlink('demo.html'); unlink('docker-stack.yml');\"",
-      "@php -r \"echo PHP_EOL.PHP_EOL.'Please Exec $ bash rm -rf .*.example *.example.md'.PHP_EOL.PHP_EOL;\""
+      "@php -r \"unlink('.gitattributes.example'); unlink('README.md.example')\""
     ]
   },
   "scripts-descriptions": {

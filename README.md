@@ -1,11 +1,16 @@
 # Create PHP Application by Composer
 
-[![GitHub stars](https://img.shields.io/github/stars/khs1994-php/example.svg?style=social&label=Stars)](https://github.com/khs1994-php/example) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-php/example/all.svg)](https://github.com/khs1994-php/example/releases) [![Build Status](https://travis-ci.org/khs1994-php/example.svg?branch=master)](https://travis-ci.org/khs1994-php/example) [![StyleCI](https://styleci.io/repos/115306597/shield?branch=master)](https://styleci.io/repos/115306597)
+[![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/115306597/shield?branch=master)](https://styleci.io/repos/115306597)
+
+
+> 注意本项目专用于 khs1994.com PHP 开源项目，他人使用请自行二次修改，严禁直接使用。
 
 ```bash
 $ composer create-project --prefer-dist khs1994/example example @dev
 
 $ cd example
+
+# 文件夹内搜索 EXAMPLE 替换为项目名称
 ```
 
 # Docker 化 PHP 项目最佳实践
@@ -20,7 +25,7 @@ $ cd example
 
 建立一个自己的 PHP 项目模板（即 `composer` 包类型为 `project`),里面包含了常用的文件的模板。
 
-示例：https://github.com/khs1994-php/example
+示例：https://github.com/khs1994-docker/php-demo
 
 将 Docker 化的常用命令所在文件夹加入 `PATH`
 
@@ -51,7 +56,7 @@ $ cd example
 
 $ git init
 
-$ git remote add origin git@url.com:username/repo.git
+$ git remote add origin git@url.com:username/EXAMPLE.git
 
 $ git checkout -b dev
 

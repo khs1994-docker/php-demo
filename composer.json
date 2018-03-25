@@ -39,12 +39,12 @@
   },
   "autoload": {
     "psr-4": {
-      "DirName\\": "src/DirName/"
+      "Example\\": "src/Example/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "DirName\\Tests\\": "tests/DirName/"
+      "Example\\Tests\\": "tests/Example/"
     }
   },
   "scripts": {
@@ -64,8 +64,8 @@
     "post-create-project-cmd": [
       "@php -r \"copy('README.example.md', 'README.md');\"",
       "@php -r \"copy('.gitattributes.example', '.gitattributes');\"",
-      "@php -r \"unlink('index.php'); unlink('demo.html');\"",
-      "@php -r \"echo PHP_EOL.PHP_EOL.'Please Exec $ bash rm -rf .*.example *.example.md'.PHP_EOL.PHP_EOL;\""
+      "@php -r \"unlink('index.php'); unlink('demo.html'); unlink('docker-stack.yml');\"",
+      "@php -r \"unlink('.gitattributes.example'); unlink('README.example.md');\""
     ]
   },
   "scripts-descriptions": {
@@ -76,7 +76,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "18.05-dev"
+      "dev-master": "18.03-dev"
     }
   }
 }

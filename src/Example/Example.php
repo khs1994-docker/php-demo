@@ -1,11 +1,11 @@
 <?php
 
-namespace DirName;
+namespace Example;
 
 /**
  *
  */
-class DirName
+class Example
 {
     private static $instance;
 

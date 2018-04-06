@@ -156,7 +156,7 @@ services:
 
 matrix:
   PHP_VERSION:
-    - 7.2.3-alpine3.7
+    - 7.2.0-alpine3.7
     # - 7.1.0-alpine3.4
     # - 7.0.0-alpine3.4
     # - 5.6.0-alpine3.4

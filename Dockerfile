@@ -8,7 +8,7 @@
 # 约定，只有 git 打了 tag 才能将对应的镜像部署到生产环境
 #
 
-ARG PHP_VERSION=7.2.3-alpine3.7
+ARG PHP_VERSION=7.2.0-alpine3.7
 
 ARG  NGINX_VERSION=1.13.9
 
@@ -43,7 +43,7 @@ COPY --from=composer /app /app
 CMD ["php-fpm", "-R", "-d", "variables_order='EGPCS'"]
 
 #
-# $ docker build -t khs1994/php-fpm:swarm-7.2.3-alpine3.7-GIT_TAG --target=php .
+# $ docker build -t khs1994/php-fpm:swarm-7.2.0-alpine3.7-GIT_TAG --target=php .
 #
 # @link https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 #

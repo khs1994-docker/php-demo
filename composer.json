@@ -64,7 +64,7 @@
     "post-create-project-cmd": [
       "@php -r \"copy('README.example.md', 'README.md');\"",
       "@php -r \"copy('.gitattributes.example', '.gitattributes');\"",
-      "@php -r \"unlink('index.php'); unlink('demo.html'); unlink('docker-stack.yml');\"",
+      "@php -r \"unlink('docker-stack.yml');\"",
       "@php -r \"unlink('.gitattributes.example'); unlink('README.example.md');\""
     ]
   },

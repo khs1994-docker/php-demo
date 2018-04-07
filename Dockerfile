@@ -60,7 +60,7 @@ CMD ["php-fpm", "-R", "-d", "variables_order='EGPCS'"]
 # Nginx 配置文件统一通过 configs 管理，严禁将配置文件打入镜像
 #
 
-# FROM khs1994/nginx:1.13.9-tls1.3-stretch
+# FROM khs1994/nginx:1.13.0-tls1.3-stretch
 
 FROM nginx:${NGINX_VERSION}-alpine as nginx
 
@@ -74,7 +74,7 @@ RUN rm -rf /etc/nginx/conf.d \
 CMD ["/wait-for-php.sh"]
 
 #
-# $ docker build -t khs1994/nginx:swarm-1.13.9-alpine-GIT_TAG .
+# $ docker build -t khs1994/nginx:swarm-1.13.0-alpine-GIT_TAG .
 #
 # @link
 #

@@ -1,4 +1,11 @@
 .DS_Store
 .idea
+
+# composer
+
 vendor
 composer.lock
+
+# python
+
+__pycache__

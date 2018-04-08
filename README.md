@@ -2,9 +2,6 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/115306597/shield?branch=master)](https://styleci.io/repos/115306597)
 
-
-> 注意本项目专用于 khs1994.com PHP 开源项目，他人使用请自行二次修改，严禁直接使用。
-
 ```bash
 $ composer create-project --prefer-dist khs1994/example example @dev
 
@@ -12,6 +9,14 @@ $ cd example
 
 # 文件夹内搜索 EXAMPLE 替换为项目名称
 ```
+
+# 初始化
+
+> 注意本项目专用于 khs1994.com PHP 开源项目，他人使用请按以下步骤进行初始化，严禁直接使用。
+
+* 编辑 `.khsci.php` 文件中的常量
+
+* 执行 `php .khsci.php` 完成替换
 
 # Docker 化 PHP 项目最佳实践
 

@@ -3,6 +3,8 @@ version: "3.6"
 #
 # docker-compose.yml 文件是为了方便本地测试构建镜像
 #
+# @link https://docs.docker.com/compose/compose-file/
+#
 # 避免使用 docker build -t ... 命令
 #
 #

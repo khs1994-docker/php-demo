@@ -2,23 +2,20 @@
 
 namespace Example;
 
-/**
- *
- */
 class Example
 {
     private static $instance;
 
     private function __construct()
     {
-        /**
+        /*
          *
          */
     }
 
     private function __clone()
     {
-        /**
+        /*
          *
          */
     }

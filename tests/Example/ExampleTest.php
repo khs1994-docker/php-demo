@@ -11,7 +11,7 @@ class ExampleTest extends ExampleTestCase
 
     public function testExample()
     {
-        $test=$this->example()->return0();
+        $test = $this->example()->return0();
 
         $this->assertEquals(0, $test);
     }

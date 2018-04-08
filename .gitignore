@@ -1,3 +1,5 @@
+# https://github.com/github/gitignore
+
 .DS_Store
 .idea
 
@@ -5,6 +7,10 @@
 
 vendor
 composer.lock
+
+# PHP-CS-Fixer
+
+.php_cs.cache
 
 # python
 

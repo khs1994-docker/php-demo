@@ -1,6 +1,7 @@
 #
 # 此 Dockerfile 使用了多阶段构建，同时构建了 PHP 及 NGINX 两个镜像
 #
+# @link https://docs.docker.com/engine/reference/builder/
 # @link https://docs.docker.com/develop/develop-images/multistage-build/
 #
 

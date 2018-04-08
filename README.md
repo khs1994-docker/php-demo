@@ -1,6 +1,6 @@
 # Create PHP Application by Composer
 
-[![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/115306597/shield?branch=master)](https://styleci.io/repos/115306597)
+[![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/124168962/shield?branch=master)](https://styleci.io/repos/124168962)
 
 ```bash
 $ composer create-project --prefer-dist khs1994/example example @dev

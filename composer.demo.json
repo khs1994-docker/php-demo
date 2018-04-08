@@ -1,0 +1,54 @@
+{
+  "name": "{{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }}",
+  "description": "{{ EXAMPLE_COMPOSER_DESCRIPT_EXAMPLE }}",
+  "keywords": [
+    "sdk",
+    "api"
+  ],
+  "homepage": "https://github.com/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "khs1994",
+      "email": "khs1994@khs1994.com",
+      "homepage": "https://khs1994.com"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}/issues"
+  },
+  "require": {
+    "php": ">=7.1",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "ext-PDO": "*",
+    "phpunit/phpunit": "^7.0"
+  },
+  "config": {
+    "platform": {
+      "php": "7.1.0"
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "suggest": {
+    "ext-xdebug": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Example\\": "src/Example/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Example\\Tests\\": "tests/Example/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "18.06-dev"
+    }
+  }
+}

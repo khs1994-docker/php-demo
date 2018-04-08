@@ -61,7 +61,7 @@ CMD ["php-fpm", "-R", "-d", "variables_order='EGPCS'"]
 # Nginx 配置文件统一通过 configs 管理，严禁将配置文件打入镜像
 #
 
-# FROM khs1994/nginx:1.13.0-tls1.3-stretch
+# FROM nginx:1.13.11-alpine
 
 FROM nginx:${NGINX_VERSION}-alpine as nginx
 

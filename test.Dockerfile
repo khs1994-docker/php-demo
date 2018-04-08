@@ -36,8 +36,8 @@ ARG PHP_VERSION_5_6_X=5.6.0
 
 FROM khs1994/php-fpm:${PHP_VERSION_7_2_X}-alpine3.7
 
-RUN git clone --recursive --depth=1 {{ EXAMPLE_GITURL_EXAMPLE }}/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }}.git /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
-    && cd /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
+RUN git clone --recursive --depth=1 {{ EXAMPLE_GIT_URL_EXAMPLE }}/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}.git /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} \
+    && cd /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} \
     && composer install -q \
     && composer update -q \
     && vendor/bin/phpunit
@@ -48,9 +48,9 @@ RUN git clone --recursive --depth=1 {{ EXAMPLE_GITURL_EXAMPLE }}/{{ EXAMPLE_GITU
 
 FROM khs1994/php-fpm:${PHP_VERSION_7_1_X}-alpine3.4
 
-COPY --from=0 /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }}
+COPY --from=0 /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}
 
-RUN cd /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
+RUN cd /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} \
     && rm -rf vendor composer.lock \
     && composer install -q \
     && composer update -q \
@@ -62,9 +62,9 @@ RUN cd /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
 
 # FROM khs1994/php-fpm:${PHP_VERSION_7_0_X}-alpine3.4
 #
-# COPY --from=0 /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }}
+# COPY --from=0 /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}
 #
-# RUN cd /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
+# RUN cd /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} \
 #       && rm -rf vendor composer.lock \
 #       && composer install -q \
 #       && composer update -q \
@@ -76,9 +76,9 @@ RUN cd /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
 
 # FROM khs1994/php-fpm:${PHP_VERSION_5_6_X}-alpine3.4
 #
-# COPY --from=0 /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }}
+# COPY --from=0 /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}
 #
-# RUN cd /root/{{ EXAMPLE_GITUSERNAME_EXAMPLE }}/{{ EXAMPLE_GITREPO_EXAMPLE }} \
+# RUN cd /root/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }} \
 #       && rm -rf vendor composer.lock \
 #       && composer install -q \
 #       && composer update -q \

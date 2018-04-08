@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Example\Tests;
 
 class ExampleTest extends ExampleTestCase
@@ -9,7 +11,7 @@ class ExampleTest extends ExampleTestCase
         return $this->getTest();
     }
 
-    public function testExample()
+    public function testExample(): void
     {
         $test = $this->example()->return0();
 

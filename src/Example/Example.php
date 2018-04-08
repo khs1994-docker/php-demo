@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Example;
 
 class Example
@@ -11,6 +13,7 @@ class Example
         /*
          *
          */
+        __DIR__;
     }
 
     private function __clone()

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Example\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Example\Example;
+use PHPUnit\Framework\TestCase;
 
 class ExampleTestCase extends TestCase
 {

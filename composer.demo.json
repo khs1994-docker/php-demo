@@ -6,7 +6,7 @@
     "api"
   ],
   "homepage": "https://github.com/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}",
-  "type": "project",
+  "type": "library",
   "license": "MIT",
   "authors": [
     {

@@ -21,6 +21,8 @@
   },
   "require": {
     "php": ">=7.1",
+    "pimple/pimple": "~3.0",
+    "doctrine/cache": "^1.6",
     "ext-json": "*"
   },
   "require-dev": {

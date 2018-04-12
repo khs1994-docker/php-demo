@@ -14,7 +14,7 @@ class ExampleTestCase extends TestCase
     public static function getTest()
     {
         if (!(self::$test instanceof Example)) {
-            self::$test = Example::getInstance();
+            self::$test = new Example(['a' => 1]);
         }
 
         return self::$test;

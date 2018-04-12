@@ -13,8 +13,8 @@ class ExampleTest extends ExampleTestCase
 
     public function testExample(): void
     {
-        $test = $this->example()->return0();
+        $test = $this->example()->bbb->getValue();
 
-        $this->assertEquals(0, $test);
+        $this->assertEquals(1, $test);
     }
 }

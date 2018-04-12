@@ -8,7 +8,7 @@ use Exception;
 use Pimple\Container;
 
 /**
- * 核心方法 注入类（依赖），之后通过调用属性或方法，获取类
+ * 核心方法 注入类（依赖），之后通过调用属性或方法，获取类.
  *
  * $container->register();
  *
@@ -22,19 +22,19 @@ use Pimple\Container;
 class Example extends Container
 {
     /**
-     * 服务提供器数组
+     * 服务提供器数组.
      */
     protected $providers = [
         Providers\BBBProvider::class,
     ];
 
     /**
-     * 注册服务提供器
+     * 注册服务提供器.
      */
     private function registerProviders()
     {
         /**
-         * 取得服务提供器数组
+         * 取得服务提供器数组.
          */
         $array = array_merge($this->providers, $this['config']->get('providers', []));
         foreach ($array as $k) {
@@ -45,17 +45,17 @@ class Example extends Container
     public function __construct(array $config = [])
     {
         parent::__construct();
-        /**
+        /*
          * 在容器中注入类
          */
         $this['config'] = new Support\Config($config);
 
-        /**
+        /*
          * 注册一个服务提供者
          */
         $this->register(new Providers\BBBProvider);
 
-        /**
+        /*
          * 注册服务提供器
          */
         $this->registerProviders();
@@ -67,12 +67,13 @@ class Example extends Container
      * @param $name
      * @param $arguments
      *
-     * @return mixed
      * @throws Exception
+     *
+     * @return mixed
      */
     public function __get($name)
     {
-        /**
+        /*
          * $example->调用不存在属性时
          */
         if (isset($this[$name])) {

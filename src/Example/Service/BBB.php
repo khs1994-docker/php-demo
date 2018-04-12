@@ -7,7 +7,7 @@ class BBB
     protected $aaa;
 
     /**
-     * 依赖注入，控制反转
+     * 依赖注入，控制反转.
      *
      * @param AAA $aaa
      */

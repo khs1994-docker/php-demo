@@ -7,7 +7,7 @@ const GIT_USERNAME = 'khs1994-php';
 const GIT_REPO = 'example';
 const STYLECI_ID = 115306597;
 const COMPOSER_PROJECT='khs1994/example';
-const COMPOSER_DESCIPT='descript';
+const COMPOSER_DESCRIPT='A XXX PHP Library';
 
 if ($fh = opendir(__DIR__)) {
     while (false !== ($file = readdir($fh))) {

@@ -1,18 +1,11 @@
 # https://styleci.io/
 
-preset: laravel
-
-linting: true
+preset: Symfony
 
 enabled:
   - strict
-  - unalign_double_arrow
-  - phpdoc_order
-  - phpdoc_separation
-
-disabled:
-  - short_array_syntax
-  - not_operator_with_successor_space
+  - strict_param
+  - ordered_use
 
 finder:
   name:

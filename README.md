@@ -1,3 +1,11 @@
+# Docker 化 PHP 项目最佳实践
+
+**Powered By khs1994-docker/lnmp**
+
+完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档](https://github.com/khs1994-docker/lnmp/tree/master/docs)
+
+* [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
+
 # Create PHP Application by Composer
 
 [![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/124168962/shield?branch=master)](https://styleci.io/repos/124168962)
@@ -6,8 +14,6 @@
 $ composer create-project --prefer-dist khs1994/example example @dev
 
 $ cd example
-
-# 文件夹内搜索 EXAMPLE 替换为项目名称
 ```
 
 # 初始化
@@ -18,29 +24,21 @@ $ cd example
 
 * 执行 `php .khsci.php` 完成替换
 
-# Docker 化 PHP 项目最佳实践
-
-**Powered By khs1994-docker/lnmp**
-
-完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档](https://github.com/khs1994-docker/lnmp/tree/master/docs)
-
-* [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
-
 ## 准备
 
 建立一个自己的 PHP 项目模板（即 `composer` 包类型为 `project`),里面包含了常用的文件的模板。
 
 示例：https://github.com/khs1994-docker/php-demo
 
-将 Docker 化的常用命令所在文件夹加入 `PATH`
-
-**务必执行此项操作** 具体请查看 [这里](https://github.com/khs1994-docker/lnmp/tree/master/bin)。
-
 ## 一、开发
 
-### 环境
+### 环境（以下步骤缺一不可）
+
+* 启动 Docker CE
 
 * LNMP [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp)
+
+* 将 Docker 化的常用命令所在文件夹加入 `PATH`，具体请查看 [这里](https://github.com/khs1994-docker/lnmp/tree/master/bin)。
 
 * IDE `PHPStorm`
 
@@ -88,11 +86,9 @@ $ ./lnmp-docker.sh development
 
 注意打开的是 PHP 项目，不是 `khs1994-docker/lnmp`！
 
-要编辑本项目建议使用 `ATOM`。
+要配置 `khs1994-docker/lnmp` 建议使用 `ATOM`。
 
 ### 6. 设置 CLI
-
->前提是已经启动了 Docker
 
 `PHPStorm 设置`-> `Languages & ...` -> `PHP` -> `CLI Interpreter` -> `点击后边三个点`
      -> `左上角添加` -> `From Docker ...` -> `选择 Docker`

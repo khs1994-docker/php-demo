@@ -2,6 +2,10 @@
 
 ## v18.05.0
 
+* Fix StyleCI error
+
+* Add Sami
+
 * Add PHP-CS-Fixer
 
 * Add khsci

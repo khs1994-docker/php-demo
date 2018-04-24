@@ -16,3 +16,8 @@ composer.lock
 # python
 
 __pycache__
+
+# Sami
+
+build
+cache

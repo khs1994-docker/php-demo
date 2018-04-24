@@ -38,7 +38,7 @@ class Example extends Container
          */
         $array = array_merge($this->providers, $this['config']->get('providers', []));
         foreach ($array as $k) {
-            $this->register(new $k);
+            $this->register(new $k());
         }
     }
 
@@ -53,7 +53,7 @@ class Example extends Container
         /*
          * 注册一个服务提供者
          */
-        $this->register(new Providers\BBBProvider);
+        $this->register(new Providers\BBBProvider());
 
         /*
          * 注册服务提供器

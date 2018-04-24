@@ -2,9 +2,9 @@
 
 namespace Example\Providers;
 
-use Pimple\Container;
 use Example\Service\AAA;
 use Example\Service\BBB;
+use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
 class BBBProvider implements ServiceProviderInterface

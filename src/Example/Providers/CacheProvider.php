@@ -2,10 +2,10 @@
 
 namespace Example\Providers;
 
-use Pimple\Container;
 use Doctrine\Common\Cache\Cache;
-use Pimple\ServiceProviderInterface;
 use Doctrine\Common\Cache\FilesystemCache;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
 class CacheProvider implements ServiceProviderInterface
 {

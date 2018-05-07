@@ -21,9 +21,9 @@
   },
   "require": {
     "php": ">=7.1",
-    "pimple/pimple": "~3.0",
-    "doctrine/cache": "^1.6",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-curl": "*",
+    "pimple/pimple": "~3.0"
   },
   "require-dev": {
     "ext-PDO": "*",

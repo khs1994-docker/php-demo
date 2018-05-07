@@ -20,9 +20,11 @@
   },
   "require": {
     "php": ">=7.1",
+    "ext-json": "*",
+    "ext-curl": "*",
     "pimple/pimple": "~3.0",
     "doctrine/cache": "^1.6",
-    "ext-json": "*"
+    "monolog/monolog": "^1.23"
   },
   "require-dev": {
     "ext-PDO": "*",

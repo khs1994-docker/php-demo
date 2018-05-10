@@ -165,8 +165,9 @@ matrix:
   REDIS_VERSION:
     - 4.0.0-alpine
   MYSQL_VERSION:
-    - 8.0.11
-    # - 5.7
+    # - 8.0.11
+    - 8.0.3
+    - 5.7.22
   MONGODB_VERSION:
     - 3.7.0
   POSTGRESQL_VERSION:

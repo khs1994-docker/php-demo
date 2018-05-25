@@ -5,13 +5,13 @@
 * 在 [GitHub](https://github.com/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}/fork) 上点击 `fork` 按钮将本仓库 fork 到自己的仓库，如 `yourname/{{ EXAMPLE_GIT_REPO_EXAMPLE }}`，然后 `clone` 到本地。
 
   ```bash
-  $ git clone -b dev git@github.com:yourname/example.git
+  $ git clone -b dev git@github.com:yourname/{{ EXAMPLE_GIT_REPO_EXAMPLE }}.git
 
-  $ cd example
+  $ cd {{ EXAMPLE_GIT_REPO_EXAMPLE }}
 
   # 将项目与上游关联
 
-  $ git remote add example git@github.com:{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}.git
+  $ git remote add upstream git@github.com:{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}.git
   ```
 
 * 增加内容或者修复错误后提交，并推送到自己的仓库。
@@ -29,9 +29,9 @@
 * 请定期更新自己仓库。
 
   ```bash
-  $ git fetch example
+  $ git fetch upstream
 
-  $ git rebase example/dev
+  $ git rebase upstream/dev
 
   $ git push -f origin dev
   ```

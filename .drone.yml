@@ -158,6 +158,7 @@ matrix:
   PHP_VERSION:
     - 7.2.6-alpine3.7
     - 7.1.18-alpine
+    # - 7.1.17-alpine3.4
     # - 7.0.30-alpine3.4
     # - 5.6.36-alpine3.4
   NGINX_VERSION:

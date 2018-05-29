@@ -6,8 +6,9 @@ const GIT_URL = 'https://github.com';
 const GIT_USERNAME = 'khs1994-php';
 const GIT_REPO = 'example';
 const STYLECI_ID = 115306597;
+const FOLDER_NAME = 'Example';
 const COMPOSER_PROJECT='khs1994/example';
-const COMPOSER_DESCRIPT='A XXX PHP Library';
+const COMPOSER_DESCRIPT='A PHP Library for the XXX';
 
 if ($fh = opendir(__DIR__)) {
     while (false !== ($file = readdir($fh))) {
@@ -22,6 +23,7 @@ if ($fh = opendir(__DIR__)) {
         $content = str_replace('{{ EXAMPLE_STYLECI_ID_EXAMPLE }}', STYLECI_ID, $content);
         $content = str_replace('{{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }}', COMPOSER_PROJECT, $content);
         $content = str_replace('{{ EXAMPLE_COMPOSER_DESCRIPT_EXAMPLE }}', COMPOSER_DESCRIPT, $content);
+        $content = str_replace('{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}', FOLDER_NAME, $content);
         file_put_contents($file, $content);
     }
     closedir($fh);

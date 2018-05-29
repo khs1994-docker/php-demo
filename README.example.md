@@ -15,7 +15,7 @@ $ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }}
 For latest commit version:
 
 ```bash
-$ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }} @dev
+$ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }} dev-master
 ```
 
 ## Usage

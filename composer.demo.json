@@ -22,12 +22,12 @@
     "php": ">=7.1",
     "ext-json": "*",
     "ext-curl": "*",
+    "ext-PDO": "*",
     "pimple/pimple": "~3.0",
     "doctrine/cache": "^1.6",
     "monolog/monolog": "^1.23"
   },
   "require-dev": {
-    "ext-PDO": "*",
     "phpunit/phpunit": "^7.0"
   },
   "config": {
@@ -50,6 +50,8 @@
       "Example\\Tests\\": "tests/Example/"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "extra": {
     "branch-alias": {
       "dev-master": "18.06-dev"

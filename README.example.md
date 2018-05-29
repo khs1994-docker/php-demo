@@ -15,6 +15,8 @@ $ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }}
 For latest commit version:
 
 ```bash
+$ composer config minimum-stability dev
+
 $ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }} dev-master
 ```
 

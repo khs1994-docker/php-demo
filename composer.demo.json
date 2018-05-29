@@ -42,12 +42,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Example\\": "src/Example/"
+      "{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}\\": "src/{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Example\\Tests\\": "tests/Example/"
+      "{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}\\Tests\\": "tests/{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}/"
     }
   },
   "minimum-stability": "dev",

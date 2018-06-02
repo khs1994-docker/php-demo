@@ -28,3 +28,9 @@ if ($fh = opendir(__DIR__)) {
     }
     closedir($fh);
 }
+
+rename('src/Example','src/'.FOLDER_NAME);
+
+rename('src/'.FOLDER_NAME.'/Example.php','src/'.FOLDER_NAME.'/'.FOLDER_NAME.'.php');
+
+rename('tests/Example','tests/'.FOLDER_NAME);

@@ -6,7 +6,7 @@ root = true
 
 indent_style = space
 
-indent_size = 2
+# indent_size = 2
 
 end_of_line = lf
 
@@ -29,4 +29,9 @@ indent_size = 4
 indent_size = 4
 
 [Makefile]
+
 indent_style = tab
+
+[{package.json,.travis.yml,.khsci.yml,.drone.yml}]
+
+indent_size = 2

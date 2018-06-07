@@ -5,9 +5,17 @@
             <directory>tests/{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
     <groups>
         <exclude>
             <group>DON'TTEST</group>
         </exclude>
     </groups>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>

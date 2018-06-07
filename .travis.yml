@@ -46,7 +46,12 @@ before_script:
 jobs:
   include:
     - stage: test
-      script: composer install -q && composer update -q && vendor/bin/phpunit
+      script:
+        - composer install -q
+        # - composer update -q
+        - vendor/bin/phpunit --coverage-clover=coverage.xml
+        # set env CODECOV_TOKEN=XXX
+        # - bash <(curl -s https://codecov.io/bash)
     # - stage: deploy
     #   script: " if ! [ -z \"${TRAVIS_TAG}\" ];then
     #   echo \"${TRAVIS_TAG}\" ;

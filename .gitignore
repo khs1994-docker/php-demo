@@ -21,3 +21,8 @@ __pycache__
 
 build
 cache
+
+# coerage report
+
+coverage_report
+coverage.xml

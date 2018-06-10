@@ -21,10 +21,11 @@ return PhpCsFixer\Config::create()
     ->setRules([
       '@Symfony' => true,
       '@Symfony:risky'=>true,
-      'full_opening_tag' => false,
+      'array_syntax' => array('syntax' => 'short'),
       'declare_strict_types' => true, // @PHP70Migration:risky, @PHP71Migration:risky
       'ternary_to_null_coalescing' => true, // @PHP70Migration, @PHP71Migration
       'void_return' => true, // @PHP71Migration:risky
+      'ordered_imports' => true,
     ])
     ->setCacheFile(__DIR__.'/.php_cs.cache')
     ->setFinder($finder)

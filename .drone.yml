@@ -16,7 +16,7 @@ pipeline:
   # 测试 PHP 项目
   #
   php:
-    image: khs1994/php-fpm:${PHP_VERSION}
+    image: khs1994/php:${PHP_VERSION}-fpm-alpine
     # pull: true
     commands:
       - pwd
@@ -53,8 +53,8 @@ pipeline:
   publish_php:
     image: plugins/docker
     # registry: docker.khs1994.com
-    repo: khs1994/php-fpm
-    tags: swarm-${PHP_VERSION}-${DRONE_TAG}
+    repo: khs1994/php
+    tags: ${PHP_VERSION}-swarm-${DRONE_TAG}-alpine
     target: php
     mirror: https://registry.docker-cn.com
     # build_args:
@@ -80,7 +80,7 @@ pipeline:
     image: plugins/docker
     # registry: docker.khs1994.com
     repo: khs1994/nginx
-    tags: swarm-${NGINX_VERSION}-alpine-${DRONE_TAG}
+    tags: ${NGINX_VERSION}-swarm-${DRONE_TAG}-alpine
     target: nginx
     mirror: https://registry.docker-cn.com
     when:
@@ -100,8 +100,8 @@ pipeline:
   publish_php_to_prod:
     image: plugins/docker
     # registry: docker.khs1994.com
-    repo: khs1994/php-fpm
-    tags: swarm-${PHP_VERSION}-${DRONE_TAG}
+    repo: khs1994/php
+    tags: ${PHP_VERSION}-swarm-${DRONE_TAG}-alpine
     target: php
     mirror: https://registry.docker-cn.com
     when:
@@ -118,7 +118,7 @@ pipeline:
     image: plugins/docker
     # registry: docker.khs1994.com
     repo: khs1994/nginx
-    tags: swarm-${NGINX_VERSION}-alpine-${DRONE_TAG}
+    tags: ${NGINX_VERSION}-swarm-${DRONE_TAG}-alpine
     target: nginx
     mirror: https://registry.docker-cn.com
     when:
@@ -156,15 +156,14 @@ services:
 
 matrix:
   PHP_VERSION:
-    - 7.2.6-alpine3.7
-    - 7.1.18-alpine
-    # - 7.1.17-alpine3.4
-    # - 7.0.30-alpine3.4
-    # - 5.6.36-alpine3.4
+    - 7.2.7
+    - 7.1.19
+    # - 7.0.30
+    # - 5.6.36
   NGINX_VERSION:
-    - 1.13.12
+    - 1.15.1
   REDIS_VERSION:
-    - 4.0.9-alpine
+    - 5.0-rc3-alpine
   MYSQL_VERSION:
     # - 8.0.11
     - 5.7.22

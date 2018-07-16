@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v18.06.0
+
+* Update Docker Image Tag format
+
 ## v18.05.0
 
 * Fix StyleCI error

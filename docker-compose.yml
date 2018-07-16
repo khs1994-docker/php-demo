@@ -31,9 +31,9 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - NGINX_VERSION=${NGINX_VERSION:-1.13.9}
+        - NGINX_VERSION=${NGINX_VERSION:-1.15.1}-alpine
       target: nginx
-    image: khs1994/nginx:swarm-${NGINX_VERSION:-1.13.9}-alpine
+    image: khs1994/nginx:${NGINX_VERSION:-1.15.1}-swarm-alpine
     depends_on:
       - 7_2_X
       # - 7_1_X
@@ -49,8 +49,8 @@ services:
       dockerfile: Dockerfile
       target: php
       args:
-        - PHP_VERSION=${PHP_VERSION_7_2_X:-7.2.0}-alpine3.7
-    image: khs1994/php-fpm:swarm-${PHP_VERSION_7_2_X:-7.2.0}-alpine3.7
+        - PHP_VERSION=${PHP_VERSION_7_2_X:-7.2.0}-fpm-alpine
+    image: khs1994/php:${PHP_VERSION_7_2_X:-7.2.0}-swarm-alpine
 
 #  7_1_X:
 #    build:
@@ -58,8 +58,8 @@ services:
 #      dockerfile: Dockerfile
 #      target: nginx
 #      args:
-#        - PHP_VERSION=${PHP_VERSION_7_1_X:-7.1.0}-alpine3.4
-#    image: khs1994/php-fpm:swarm-${PHP_VERSION_7_1_X:-7.1.0}-alpine3.4
+#        - PHP_VERSION=${PHP_VERSION_7_1_X:-7.1.0}-fpm-alpine
+#    image: khs1994/php:${PHP_VERSION_7_1_X:-7.1.0}-swarm-alpine
 #
 #  7_0_X:
 #    build:
@@ -67,8 +67,8 @@ services:
 #      dockerfile: Dockerfile
 #      target: nginx
 #      args:
-#        - PHP_VERSION=${PHP_VERSION_7_0_X:-7.0.0}-alpine3.4
-#    image: khs1994/php-fpm:swarm-${PHP_VERSION_7_0_X:-7.0.0}-alpine3.4
+#        - PHP_VERSION=${PHP_VERSION_7_0_X:-7.0.0}-fpm-alpine
+#    image: khs1994/php:${PHP_VERSION_7_0_X:-7.0.0}-swarm-alpine
 #
 #  5_6_X:
 #    build:
@@ -76,5 +76,5 @@ services:
 #      dockerfile: Dockerfile
 #      target: nginx
 #      args:
-#        - PHP_VERSION=${PHP_VERSION_5_6_X:5.6.0}-alpine3.4
-#    image: khs1994/php-fpm:swarm-${PHP_VERSION_5_6_X:5.6.0}-alpine3.4
+#        - PHP_VERSION=${PHP_VERSION_5_6_X:5.6.0}-fpm-alpine
+#    image: khs1994/php:${PHP_VERSION_5_6_X:5.6.0}-swarm-alpine

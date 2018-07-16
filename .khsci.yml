@@ -13,7 +13,7 @@ pipeline:
   #
 
   php:
-    image: khs1994/php-fpm:${PHP_VERSION}
+    image: khs1994/php:${PHP_VERSION}-fpm-alpine
     pull: true
     environment:
       - CI_REDIS_HOST=redis
@@ -59,8 +59,8 @@ pipeline:
     #
     image: ci_docker_build
     # registry: docker.khs1994.com
-    repo: khs1994/php-fpm
-    tags: swarm-7.2.5-${CI_TAG}
+    repo: khs1994/php
+    tags: ${PHP_VERSION}-swarm-${CI_TAG}-alpine
     # target: php
     build_args:
        - a:1
@@ -125,15 +125,14 @@ services:
 
 matrix:
   PHP_VERSION:
-    - 7.2.6-alpine3.7
-    - 7.1.18-alpine
-    # - 7.1.17-alpine3.4
-    # - 7.0.30-alpine3.4
-    # - 5.6.36-alpine3.4
+    - 7.2.7
+    - 7.1.19
+    # - 7.0.30
+    # - 5.6.36
   NGINX_VERSION:
-    - 1.13.12
+    - 1.15.1
   REDIS_VERSION:
-    - 4.0.9-alpine
+    - 5.0-rc3-alpine
   MYSQL_VERSION:
     # - 8.0.11
     - 5.7.22

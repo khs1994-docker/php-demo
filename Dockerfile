@@ -9,15 +9,15 @@
 # 约定，只有 git 打了 tag 才能将对应的镜像部署到生产环境
 #
 
-ARG PHP_VERSION=7.2.0-alpine3.7
+ARG PHP_VERSION=7.2.0-fpm-alpine
 
-ARG  NGINX_VERSION=1.13.9
+ARG  NGINX_VERSION=1.15.1
 
 #
 # 安装 composer 依赖
 #
 
-FROM khs1994/php-fpm:${PHP_VERSION} as composer
+FROM khs1994/php:${PHP_VERSION} as composer
 
 COPY . /app/EXAMPLE/
 
@@ -37,14 +37,14 @@ RUN cd /app/EXAMPLE \
 # 将 PHP 项目打入 PHP 镜像
 #
 
-FROM khs1994/php-fpm:${PHP_VERSION} as php
+FROM khs1994/php:${PHP_VERSION} as php
 
 COPY --from=composer /app /app
 
 CMD ["php-fpm", "-R", "-d", "variables_order='EGPCS'"]
 
 #
-# $ docker build -t khs1994/php-fpm:swarm-7.2.0-alpine3.7-GIT_TAG --target=php .
+# $ docker build -t khs1994/php:7.2.0-swarm-GIT_TAG-alpine --target=php .
 #
 # @link https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 #
@@ -61,9 +61,9 @@ CMD ["php-fpm", "-R", "-d", "variables_order='EGPCS'"]
 # Nginx 配置文件统一通过 configs 管理，严禁将配置文件打入镜像
 #
 
-# FROM nginx:1.13.11-alpine
+# FROM nginx:1.15.1-alpine
 
-FROM nginx:${NGINX_VERSION}-alpine as nginx
+FROM nginx:${NGINX_VERSION} as nginx
 
 COPY --from=php /app /app
 
@@ -75,7 +75,7 @@ RUN rm -rf /etc/nginx/conf.d \
 CMD ["/wait-for-php.sh"]
 
 #
-# $ docker build -t khs1994/nginx:swarm-1.13.0-alpine-GIT_TAG .
+# $ docker build -t khs1994/nginx:1.15.0-swarm-GIT_TAG-alpine .
 #
 # @link
 #

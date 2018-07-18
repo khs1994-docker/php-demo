@@ -34,6 +34,15 @@ php:
 #   mariadb: '10.0'
 #   postgresql: '9.4'
 before_script:
+  # update docker version
+
+  # - docker --version
+  # - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) test"
+  # - sudo apt-get update
+  # - sudo apt-get -y install docker-ce
+  # - docker --version
+
   # - sleep 15
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS tests;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS tests_tmp;' -U postgres; fi"
@@ -50,7 +59,7 @@ jobs:
         - composer install -q
         # - composer update -q
         - vendor/bin/phpunit --coverage-clover=coverage.xml
-        # set env CODECOV_TOKEN=XXX
+      # after_success:
         # - bash <(curl -s https://codecov.io/bash)
     # - stage: deploy
     #   script: " if ! [ -z \"${TRAVIS_TAG}\" ];then

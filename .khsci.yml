@@ -15,6 +15,7 @@ pipeline:
   php:
     image: khs1994/php:${PHP_VERSION}-fpm-alpine
     pull: true
+    shell: bash
     environment:
       - CI_REDIS_HOST=redis
       - CI_REDIS_PORT=6379
@@ -27,10 +28,12 @@ pipeline:
       - mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini
       - pwd
       - composer install -q
-      - composer update -q
+      # - composer update -q
       # 服务初始化需要时间，这里延迟执行
       - sleep 30
-      - vendor/bin/phpunit
+      - vendor/bin/phpunit --coverage-clover=coverage.xml
+      # please set env CODECOV_TOKEN=XXX
+      - bash <(curl -s https://codecov.io/bash)
     when:
       # platform: linux/amd64
       # platform:  [ linux/*, windows/amd64 ]

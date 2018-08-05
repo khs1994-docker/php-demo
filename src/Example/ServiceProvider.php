@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Example;
@@ -11,6 +12,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      * @var bool
      */
     protected $defer = true;
+
     /**
      * 在容器中注册绑定。
      */
@@ -21,13 +23,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
         // $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
         // $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
-        $this->app->singleton(Example::class, function () {
+        $this->app->singleton(Example::class, function (): void {
             return;
         });
         //        $this->app->bind(Example::class, function () {
         //            return ;
         //        });
     }
+
     /**
      * 在注册后进行服务的启动。
      */
@@ -52,6 +55,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         //     __DIR__.'/path/to/assets' => public_path('vendor/courier'),
         // ], 'public');
     }
+
     /**
      * Get the config path.
      *
@@ -61,6 +65,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         return config_path('config-file.php');
     }
+
     /**
      * 获取提供器提供的服务。
      *

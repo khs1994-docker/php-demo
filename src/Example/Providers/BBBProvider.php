@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Example\Providers;
 
 use Example\Service\AAA;
@@ -9,7 +11,7 @@ use Pimple\ServiceProviderInterface;
 
 class BBBProvider implements ServiceProviderInterface
 {
-    public function register(Container $pimple)
+    public function register(Container $pimple): void
     {
         // AAA
         $pimple['bbb.aaa'] = function ($app) {

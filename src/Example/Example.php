@@ -31,7 +31,7 @@ class Example extends Container
     /**
      * 注册服务提供器.
      */
-    private function registerProviders()
+    private function registerProviders(): void
     {
         /**
          * 取得服务提供器数组.

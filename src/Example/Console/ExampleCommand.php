@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Example\Console;
 
 use Illuminate\Console\Command;
-use TencentAI\Error\TencentAIError;
 
 class ExampleCommand extends Command
 {
@@ -27,7 +26,6 @@ class ExampleCommand extends Command
         $option = $this->hasOption('option');
 
         try {
-
             $output = 1;
 
             // $this->ask('question','default');

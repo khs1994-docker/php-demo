@@ -6,7 +6,7 @@ namespace Example;
 
 class Facade extends \Illuminate\Support\Facades\Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): void
     {
         return;
     }

@@ -27,6 +27,7 @@
     "pimple/pimple": "~3.0"
   },
   "require-dev": {
+    "illuminate/console": "^5.5",
     "phpunit/phpunit": "^7.2"
   },
   "config": {

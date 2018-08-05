@@ -12,7 +12,7 @@
     </filter>
     <groups>
         <exclude>
-            <group>DON'TTEST</group>
+            <group>dont-test</group>
         </exclude>
     </groups>
     <php>

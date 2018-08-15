@@ -26,6 +26,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->singleton(Example::class, function (): void {
             return;
         });
+
+        $this->app->alias(Example::class, 'example');
         //        $this->app->bind(Example::class, function () {
         //            return ;
         //        });

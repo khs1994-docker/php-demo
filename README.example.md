@@ -6,7 +6,7 @@
 
 ## Installation
 
-To Use XXX SDK, simply:
+To Use the package, simply:
 
 ```bash
 $ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }}
@@ -15,8 +15,6 @@ $ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }}
 For latest commit version:
 
 ```bash
-$ composer config minimum-stability dev
-
 $ composer require {{ EXAMPLE_COMPOSER_PROJECT_EXAMPLE }} dev-master
 ```
 

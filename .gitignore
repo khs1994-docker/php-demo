@@ -26,3 +26,5 @@ cache
 
 coverage_report
 coverage.xml
+
+.env

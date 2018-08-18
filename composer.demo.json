@@ -19,7 +19,7 @@
     "issues": "https://github.com/{{ EXAMPLE_GIT_USERNAME_EXAMPLE }}/{{ EXAMPLE_GIT_REPO_EXAMPLE }}/issues"
   },
   "require": {
-    "php": ">=7.2",
+    "php": ">=7.2.0",
     "ext-json": "*",
     "ext-curl": "*",
     "ext-PDO": "*",
@@ -28,7 +28,6 @@
     "monolog/monolog": "^1.23"
   },
   "require-dev": {
-    "illuminate/console": "^5.5",
     "phpunit/phpunit": "^7.2"
   },
   "config": {

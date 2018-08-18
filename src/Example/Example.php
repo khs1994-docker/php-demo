@@ -33,9 +33,7 @@ class Example extends Container
      */
     private function registerProviders(): void
     {
-        /**
-         * 取得服务提供器数组.
-         */
+        // 取得服务提供器数组.
         $array = array_merge($this->providers, $this['config']->get('providers', []));
         foreach ($array as $k) {
             $this->register(new $k());
@@ -45,19 +43,14 @@ class Example extends Container
     public function __construct(array $config = [])
     {
         parent::__construct();
-        /*
-         * 在容器中注入类
-         */
+
+        // 在容器中注入类
         $this['config'] = new Support\Config($config);
 
-        /*
-         * 注册一个服务提供者
-         */
+        // 注册一个服务提供者
         $this->register(new Providers\BBBProvider());
 
-        /*
-         * 注册服务提供器
-         */
+        // 注册服务提供器
         $this->registerProviders();
     }
 
@@ -73,9 +66,7 @@ class Example extends Container
      */
     public function __get($name)
     {
-        /*
-         * $example->调用不存在属性时
-         */
+        // $example->调用不存在属性时
         if (isset($this[$name])) {
             return $this[$name];
         }

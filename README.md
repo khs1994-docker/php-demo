@@ -1,7 +1,5 @@
 # Docker 化 PHP 项目最佳实践
 
-**Powered By khs1994-docker/lnmp**
-
 完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档](https://github.com/khs1994-docker/lnmp/tree/master/docs)
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
@@ -11,7 +9,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/124168962/shield?branch=master)](https://styleci.io/repos/124168962)
 
 ```bash
-$ composer create-project khs1994/example:dev-master example
+$ composer create-project --prefer-dist khs1994/example:dev-master example
 
 $ cd example
 ```
@@ -29,6 +27,21 @@ $ cd example
 建立一个自己的 PHP 项目模板（即 `composer` 包类型为 `project`),里面包含了常用的文件的模板。
 
 示例：https://github.com/khs1994-docker/php-demo
+
+### 内置文件模板
+
+* 建议多看看几个 PHP 开源项目，看看别人的项目里都有哪些文件，作用是什么
+
+| Filename          | Description                     |
+| :-------------    | :-------------                  |
+| `.gitattributes`  | git 打包时排除文件（例如 测试代码）|
+| `.drone.yml`      | [`Drone` CI 工具](https://github.com/khs1994-docker/ci) |
+| `.editorconfig`   | [定义文件格式规则（例如 缩进方式）](https://editorconfig.org/)|
+| `.khsci.yml`      | [`KhsCI` CI 工具](https://ci.khs1994.com) |
+| `.php_cs`         | [PHP 代码格式化工具](https://github.com/FriendsOfPHP/PHP-CS-Fixer) |
+| `.sami.php`       | [PHP 文档生成工具](https://github.com/FriendsOfPHP/Sami) |
+| `.styleci.yml`    | [`Style CI` PHP 代码格式化 CI 工具](https://styleci.io/) |
+| `.travis.yml`     | [`Travis` CI 工具](https://www.travis-ci.com) |
 
 ## 一、开发
 
@@ -53,7 +66,7 @@ $ cd example
 ```bash
 $ cd lnmp/app
 
-$ lnmp-composer create-project --prefer-dist khs1994/example example @dev
+$ lnmp-composer create-project --prefer-dist khs1994/example:dev-master example
 
 $ cd example
 
@@ -75,7 +88,7 @@ $ echo -e "<?php\nphpinfo();" >> index.php
 ### 3. 启动 khs1994-docker/lnmp
 
 ```bash
-$ ./lnmp-docker.sh development
+$ ./lnmp-docker up
 ```
 
 ### 4. 浏览器验证
@@ -84,15 +97,15 @@ $ ./lnmp-docker.sh development
 
 ### 5. PHPStorm 打开 PHP 项目
 
-注意打开的是 PHP 项目，不是 `khs1994-docker/lnmp`！
+注意打开的是 PHP 项目（避免文件层次过深，IDE 直接打开 PHP 项目），不是 `khs1994-docker/lnmp`！
 
-要配置 `khs1994-docker/lnmp` 建议使用 `ATOM`。
+要配置 `khs1994-docker/lnmp` 建议使用另外的文本编辑器。
 
 ### 6. 设置 CLI
 
 `PHPStorm 设置`-> `Languages & ...` -> `PHP` -> `CLI Interpreter` -> `点击后边三个点`
      -> `左上角添加` -> `From Docker ...` -> `选择 Docker`
-     -> `Image name` -> `选择 khs1994/php-fpm:7.2.x-alpine3.7`
+     -> `Image name` -> `选择 khs1994/php:7.2.x-fpm-alpine`
      -> `点击 OK 确认`
 
 点击 ok 之后跳转的页面上 `Additionl` -> `Debugger extension`-> `填写 xdebug`

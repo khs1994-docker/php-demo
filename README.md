@@ -222,7 +222,7 @@ $ git push origin dev:dev
 
 * CI/CD 服务器构建并推送镜像到 Docker 仓库。
 
-生产环境部署 [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp) 请查看 https://github.com/khs1994-docker/lnmp/tree/master/docs/production
+生产环境部署 [khs1994-docker/lnmp-k8s](https://github.com/khs1994-docker/lnmp-k8s)
 
 ### 2. Docker 私有仓库通知到指定地址
 

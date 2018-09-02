@@ -1,10 +1,10 @@
-# Docker 化 PHP 项目最佳实践
+# Docker 化 PHP 项目最佳实践(从 docker run 到 helm install ... --tls)
 
 完全使用 Docker 开发、部署 PHP 项目。本指南只是简单列出，具体内容请查看 [文档](https://github.com/khs1994-docker/lnmp/tree/master/docs)
 
 * [问题反馈](https://github.com/khs1994-docker/lnmp/issues/187)
 
-# Create PHP Application by Composer
+## Create PHP Application by Composer
 
 [![GitHub stars](https://img.shields.io/github/stars/khs1994-docker/php-demo.svg?style=social&label=Stars)](https://github.com/khs1994-docker/php-demo) [![PHP from Packagist](https://img.shields.io/packagist/php-v/khs1994/example.svg)](https://packagist.org/packages/khs1994/example) [![GitHub (pre-)release](https://img.shields.io/github/release/khs1994-docker/php-demo/all.svg)](https://github.com/khs1994-docker/php-demo/releases) [![Build Status](https://travis-ci.org/khs1994-docker/php-demo.svg?branch=master)](https://travis-ci.org/khs1994-docker/php-demo) [![StyleCI](https://styleci.io/repos/124168962/shield?branch=master)](https://styleci.io/repos/124168962)
 
@@ -14,7 +14,17 @@ $ composer create-project --prefer-dist khs1994/example:dev-master example
 $ cd example
 ```
 
-# 初始化
+## 进阶路线
+
+* `docker run`
+
+* `docker-compose up`
+
+* `kubectl create -f filename.yaml`
+
+* `helm install ./lnmp --tls`
+
+## 初始化
 
 > 注意本项目专用于 khs1994.com PHP 开源项目，他人使用请按以下步骤进行初始化，严禁直接使用。
 
@@ -22,13 +32,13 @@ $ cd example
 
 * 执行 `php .khsci.php` 完成替换
 
-## 准备
+### 准备
 
 建立一个自己的 PHP 项目模板（即 `composer` 包类型为 `project`),里面包含了常用的文件的模板。
 
 示例：https://github.com/khs1994-docker/php-demo
 
-### 内置文件模板
+#### 内置文件模板
 
 * 建议多看看几个 PHP 开源项目，看看别人的项目里都有哪些文件，作用是什么
 
@@ -100,6 +110,8 @@ $ ./lnmp-docker up
 注意打开的是 PHP 项目（避免文件层次过深，IDE 直接打开 PHP 项目），不是 `khs1994-docker/lnmp`！
 
 要配置 `khs1994-docker/lnmp` 建议使用另外的文本编辑器。
+
+> 你可以通过设置 [`APP_ROOT`](https://github.com/khs1994-docker/lnmp/blob/master/docs/development.md#app_root) 变量来实现 `app` 与 `khs1994-docker/lnmp` 并列。
 
 ### 6. 设置 CLI
 
@@ -198,7 +210,11 @@ $ git push origin dev:dev
 
 ## 三、开发、测试循环
 
-## git 添加 tag
+## 四、在 Kubernetes 中部署生产环境 (全自动)
+
+> 可以在生产环境之前加一个 **预上线** 环境，这里省略。
+
+### 1. git 添加 tag
 
 * 只有添加了 `tag` 的代码才能部署到生产环境
 
@@ -206,65 +222,10 @@ $ git push origin dev:dev
 
 * CI/CD 服务器构建并推送镜像到 Docker 仓库。
 
-## 四、部署 (全自动)
-
 生产环境部署 [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp) 请查看 https://github.com/khs1994-docker/lnmp/tree/master/docs/production
 
-### 1. Docker 私有仓库通知到指定地址
+### 2. Docker 私有仓库通知到指定地址
 
-### 2. Swarm mode 或 k8s 集群调用相应的 API 自动更新服务
+### 3. 在 CI/CD 系统中使用 Helm 在 k8s 集群更新服务
 
-#### Swarm mode
-
-```bash
-#
-# 管理员通过 API 新增配置文件、密钥, 并更新
-#
-# @link https://docs.docker.com/engine/swarm/configs/
-#
-# @link https://docs.docker.com/engine/swarm/secrets/
-#
-# @link https://docs.docker.com/edge/engine/reference/commandline/service_update/
-#
-
-$ docker config create nginx_khs1994_com_conf_v2 config/nginx/khs1994.com.conf
-
-# 从 git 源文件创建 configs
-
-$ curl https://raw.githubusercontent.com/khs1994-docker/php-demo/d77eee54be1c023bc3e9dc1a025bde02471f1b5e/nginx/khs1994.com.conf | docker config create nginx_khs1994_com_conf_v2 -
-
-#
-# 更新配置的时候也可以同时更新镜像
-#
-
-$ docker service update \
-    --config-rm nginx_khs1994_com_conf \
-    --config-add source=nginx_khs1994_com_conf_v2,target=/etc/nginx/conf.d/khs1994.com.conf \
-    --image khs1994/nginx:swarm-alpine-NEW_GIT_TAG lnmp_nginx \
-    lnmp_nginx
-
-$ docker secret create khs1994_com_ssl_crt_v2 config/nginx/ssl/khs1994.com.crt
-
-# 从 git 源文件创建 secrets，省略
-
-$ docker service update \
-    --secret-rm khs1994_com_ssl_crt \
-    --secret-add source=khs1994_com_ssl_crt_v2,target=/etc/nginx/conf.d/ssl/khs1994.com.crt \
-    lnmp_nginx
-
-#
-# 更新镜像
-#
-
-$ docker service update --image khs1994/nginx:swarm-alpine-NEW_GIT_TAG lnmp_nginx
-
-#
-# 其他项也可以更新，请查看帮助信息
-#
-
-$ docker service update --help
-```
-
-#### k8s
-
-### 3. 完成部署
+* https://github.com/khs1994-docker/lnmp-k8s/tree/master/helm

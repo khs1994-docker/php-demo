@@ -57,6 +57,8 @@ $ cd example
 
 ### 环境（以下步骤缺一不可）
 
+* 假设系统中不包含任何 PHP 等程序（实际上为了防止 Docker 崩溃等意外情况，建议系统中仍然安装这些软件作为 PLAN B）
+
 * 启动 Docker CE
 
 * LNMP [khs1994-docker/lnmp](https://github.com/khs1994-docker/lnmp)
@@ -67,7 +69,7 @@ $ cd example
 
 * git 分支 `dev`
 
-* 假设系统中不包含任何 PHP 等程序（实际上为了防止 Docker 崩溃等意外情况，建议系统中仍然安装这些软件作为 PLAN B）
+* 使用 Docker 作为 LNMP 环境，实际上大大简化了部署，但配置开发环境需要较多步骤，同时由于 Windows、macOS 运行 Docker 效率较 Linux 差，实际在开发环境是否使用 Docker，请各位自行权衡。
 
 ### 1. 新建 PHP 项目
 
@@ -99,11 +101,13 @@ $ echo -e "<?php\nphpinfo();" >> index.php
 
 ```bash
 $ ./lnmp-docker up
+
+# $ ./lnmp-docker restart
 ```
 
 ### 4. 浏览器验证
 
-浏览器打开页面，出现 php 信息
+浏览器打开页面出现 php 信息
 
 ### 5. PHPStorm 打开 PHP 项目
 
@@ -113,22 +117,38 @@ $ ./lnmp-docker up
 
 > 你可以通过设置 [`APP_ROOT`](https://github.com/khs1994-docker/lnmp/blob/master/docs/development.md#app_root) 变量来实现 `app` 与 `khs1994-docker/lnmp` 并列。
 
-### 6. 设置 CLI
+### 6. CLI settings
+
+由于 PHP 环境位于 Docker 中，必须进行额外的配置
 
 `PHPStorm 设置`-> `Languages & ...` -> `PHP` -> `CLI Interpreter` -> `点击后边三个点`
      -> `左上角添加` -> `From Docker ...` -> `选择 Docker`
      -> `Image name` -> `选择 khs1994/php:7.2.x-fpm-alpine`
      -> `点击 OK 确认`
 
-点击 ok 之后跳转的页面上 `Additionl` -> `Debugger extension`-> `填写 xdebug`
+点击 ok 之后跳转的页面上 `Additionl` -> `Debugger extension`-> 填写 `xdebug`
 
 具体请查看 https://github.com/khs1994-docker/lnmp/issues/260#issuecomment-373964173
 
 再点击 ok 之后跳转到了 `PHPStorm 设置`-> `Languages & ...` -> `PHP` -> `CLI Interpreter` 这个页面
 
-点击 Docker container 后边三个点配置容器的参数（就像 docker run ... 命令行配置的参数一样）
+#### 配置路径对应关系
+
+这里以 Windows 为例，其他系统同理（添加本机路径与容器路径对应关系即可）。
+
+由于 Windows 与 Linux 路径表示方法不同，我们必须另外添加对应关系。配置容器目录与本地项目之间的对应关系。
+
+假设本地项目目录位于 `C:/Users/username/app/example` 对应的容器目录位于 `/app/example`
+
+点击 `Path mappings` 添加一个条目 `C:/Users/username/app/example` => `/app/example`
+
+#### 配置容器其他参数
+
+点击 `Docker container` 后边三个点配置容器的参数（就像 docker run ... 命令行配置的参数一样）
 
 * Network mode `lnmp_backend` (非常重要)
+
+* Volume bindings -> Container path `/app/PHP_PROJECT`, Host path 保持不变，需要挂载其他文件再新增一个条目即可
 
 * 其他参数根据实际需要自行配置
 
@@ -155,8 +175,8 @@ $ lnmp-composer require phpunit/phpunit
 `PHPStorm 设置`-> `Languages & ...` -> `PHP` ->`Test Frameworks` -> `左上角添加`
               -> `PHPUnit by Remote Interpreter` -> `选择第五步添加的 Docker 镜像`
               -> `点击 OK` -> `PHPUnit Library` -> `选择 Use Composer autoloader`
-              -> `Path to script` -> `填写 /opt/project/vendor/autoload.php`
-              -> `点击右边刷新` -> `点击 OK 确认`
+              -> `Path to script` -> 点击右边刷新按钮即可自动识别，或者手动 `填写 /app/PHP_PROJECT/vendor/autoload.php`
+              -> `点击 OK 确认`
 
 在测试函数名单击右键 `run FunName` 开始测试。
 
@@ -165,6 +185,7 @@ $ lnmp-composer require phpunit/phpunit
 ```bash
 $ cd lnmp/app/PHP_PROJECT
 
+# 根目录必须包含 PHPUnit 配置文件 phpunit.xml
 $ lnmp-phpunit [参数]
 ```
 
@@ -203,6 +224,8 @@ $ git push origin dev:dev
 * Travis CI (公共的、仅支持 GitHub CI/CD)
 
 * Drone (私有化 CI/CD)
+
+* KhsCI (开发中，专为 PHPer 设计的基于容器的 CI/CD 系统)
 
 ### 2. CI/CD 服务器测试
 

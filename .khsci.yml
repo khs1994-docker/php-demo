@@ -25,6 +25,7 @@ pipeline:
       - CI_MYSQL_PASSWORD=mytest
       - CI_MYSQL_DBNAME=test
     commands:
+      - composer config -g repo.packagist composer https://packagist.laravel-china.org
       - mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini
       - pwd
       - composer install -q

@@ -19,6 +19,9 @@ use Symfony\Component\Finder\Finder;
 $iterator = Finder::create()
     ->files()
     ->name('*.php')
+    ->exclude('config')
+    ->exclude('demo')
+    ->exclude('public')
     ->exclude('resource')
     ->exclude('tests')
     ->in($dir = __DIR__.'/src');
@@ -31,7 +34,7 @@ return new Sami($iterator);
 
 // return new Sami($iterator, [
 //         'versions' => $versions,
-//         'title' => 'Tencent AI SDK API',
+//         'title' => 'Title API',
 //         'build_dir' => __DIR__.'/build/%version%',
 //         'cache_dir' => __DIR__.'/cache/%version%',
 //         'remote_repository' => new GitHubRemoteRepository('username/repo', __DIR__),

@@ -8,7 +8,8 @@
 language: php
 # cache:
 #   directories:
-#   - vendor
+#   - cache
+
 sudo: required
 # services:
 # - docker
@@ -19,6 +20,7 @@ sudo: required
 # - mariadb
 # - postgresql
 # - mongodb
+
 php:
   # - 5.6
   # - 7.0
@@ -33,7 +35,8 @@ php:
 # addons:
 #   mariadb: '10.0'
 #   postgresql: '9.4'
-before_script:
+
+before_install:
   # update docker version
 
   # - docker --version
@@ -55,13 +58,17 @@ before_script:
 jobs:
   include:
     - stage: test
-      script:
+      install:
         - composer install -q
         # - composer update -q
         - composer require illuminate/console
+        - curl -fsSL http://get.sensiolabs.org/sami.phar -o sami
+        - chmod +x sami
+      script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml
       # after_success:
         # - bash <(curl -s https://codecov.io/bash)
+        # - ./sami update .sami.php
     # - stage: deploy
     #   script: " if ! [ -z \"${TRAVIS_TAG}\" ];then
     #   echo \"${TRAVIS_TAG}\" ;
@@ -95,3 +102,12 @@ env:
 #
 # memcached/redis -> localhost
 #
+
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   local-dir: build
+#   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+#   keep-history: true
+#   on:
+#     branch: master

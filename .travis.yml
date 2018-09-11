@@ -26,6 +26,15 @@ php:
   # - 7.0
   # - 7.1
   - 7.2
+  # - 7.3 # not support
+  # - nightly # 7.4
+
+matrix:
+  fast_finish: true
+  # allow_failures:
+  # - php: nightly
+  # - php: 7.3
+  # - env: KEY=VALUE
 
 #
 # 设置数据库
@@ -65,6 +74,7 @@ jobs:
         - curl -fsSL http://get.sensiolabs.org/sami.phar -o sami
         - chmod +x sami
       script:
+        # - phpenv config-rm xdebug.ini || echo "xdebug not available"
         - vendor/bin/phpunit --coverage-clover=coverage.xml
       # after_success:
         # - bash <(curl -s https://codecov.io/bash)

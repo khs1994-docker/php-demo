@@ -21,3 +21,15 @@
 /phpunit.xml         export-ignore
 /renovate.json       export-ignore
 /test.Dockerfile     export-ignore
+
+# merge skip file
+# $ git config --global merge.ours.driver true
+# # $ git merge -s ours
+#
+# @see https://stackoverflow.com/questions/15232000/git-ignore-files-during-merge
+# @see https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes#_merge_strategies
+
+CHANGELOG.md       merge=ours
+composer.json      merge=ours
+docker-compose.yml merge=ours
+Dockerfile         merge=ours

@@ -77,7 +77,7 @@
     "z-travis": "[self defined] How to encrypt travis file",
     "z-encrypt": "[self defined] How to encrypt file by openssl"
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "extra": {
     "branch-alias": {

@@ -82,7 +82,7 @@
   "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "18.06-dev"
+      "dev-master": "18.12-dev"
     }
   }
 }

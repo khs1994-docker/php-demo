@@ -19,11 +19,7 @@ use Symfony\Component\Finder\Finder;
 $iterator = Finder::create()
     ->files()
     ->name('*.php')
-    ->exclude('config')
-    ->exclude('demo')
-    ->exclude('public')
-    ->exclude('resource')
-    ->exclude('tests')
+    // ->exclude('tests')
     ->in($dir = __DIR__.'/src');
 
 // $versions = GitVersionCollection::create($dir)

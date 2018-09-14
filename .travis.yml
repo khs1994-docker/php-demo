@@ -10,6 +10,9 @@ language: php
 #   directories:
 #   - cache
 
+dist: xenial #16.04
+# dist: trusty # 14.04
+
 sudo: required
 # services:
 # - docker
@@ -24,16 +27,16 @@ sudo: required
 php:
   # - 5.6
   # - 7.0
-  # - 7.1
+  - 7.1
   - 7.2
-  # - 7.3 # not support
-  # - nightly # 7.4
+  - 7.3
+  - nightly
 
 matrix:
   fast_finish: true
-  # allow_failures:
-  # - php: nightly
-  # - php: 7.3
+  allow_failures:
+  - php: 7.3
+  - php: nightly
   # - env: KEY=VALUE
 
 #
@@ -52,7 +55,7 @@ before_install:
   # - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   # - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) test"
   # - sudo apt-get update
-  # - sudo apt-get -y install docker-ce
+  # - sudo apt-get -y install docker-ce || sudo apt-get -f install
   # - docker --version
 
   # - sleep 15
@@ -64,37 +67,20 @@ before_install:
   - sh -c "if [ '$ENABLE_MONGODB' = 'enable' ]; then mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'; fi"
   - php .khsci.php
 
-jobs:
-  include:
-    - stage: test
-      install:
-        - composer install -q
-        # - composer update -q
-        - composer require illuminate/console
-        - curl -fsSL http://get.sensiolabs.org/sami.phar -o sami
-        - chmod +x sami
-      script:
-        # - phpenv config-rm xdebug.ini || echo "xdebug not available"
-        - vendor/bin/phpunit --coverage-clover=coverage.xml
-      # after_success:
-        # - bash <(curl -s https://codecov.io/bash)
-        # - ./sami update .sami.php
-    # - stage: deploy
-    #   script: " if ! [ -z \"${TRAVIS_TAG}\" ];then
-    #   echo \"${TRAVIS_TAG}\" ;
-    #   docker build -t khs1994/php-fpm:swarm-7.2.0-alpine3.7-${TRAVIS_TAG} --target=php . ;
-    #   docker build -t khs1994/nginx:swarm-1.13.0-alpine-${TRAVIS_TAG} . ;
-    #   docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} ;
-    #   docker push khs1994/php-fpm:swarm-7.2.0-alpine3.7-${TRAVIS_TAG} ;
-    #   docker push khs1994/nginx:swarm-1.13.0-alpine-${TRAVIS_TAG} ;
-    #   else
-    #   echo \"NOT TAG, Don't Build\";
-    #   fi "
+install:
+  - composer install -q
+  # - composer update -q
+  - composer require illuminate/console
+  # - curl -fsSL http://get.sensiolabs.org/sami.phar -o sami
+  # - chmod +x sami
 
-stages:
-  - test
-  # - name: deploy
-  #   if: tag =~ ^[0-9.]+$
+script:
+  # - phpenv config-rm xdebug.ini || echo "xdebug not available"
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+# after_success:
+# - bash <(curl -s https://codecov.io/bash)
+# - ./sami update .sami.php
 
 env:
   global:
@@ -102,6 +88,15 @@ env:
     # - DB=sqlite
     # - DB=mysql
     # - DB=postgresql
+
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   local-dir: build
+#   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+#   keep-history: true
+#   on:
+#     branch: master
 
 #
 # rabbitmq vhost / username guest password guest
@@ -112,12 +107,3 @@ env:
 #
 # memcached/redis -> localhost
 #
-
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   local-dir: build
-#   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-#   keep-history: true
-#   on:
-#     branch: master

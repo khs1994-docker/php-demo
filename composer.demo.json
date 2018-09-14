@@ -51,7 +51,7 @@
       "{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}\\Tests\\": "tests/{{ EXAMPLE_FOLDER_NAME_EXAMPLE }}/"
     }
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "extra": {
     "branch-alias": {

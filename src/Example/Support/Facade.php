@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Example;
+namespace Example\Support;
 
 class Facade extends \Illuminate\Support\Facades\Facade
 {
     protected static function getFacadeAccessor()
     {
-        return Example::class;
+        return 'example';
     }
 }

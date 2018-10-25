@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Example;
+namespace Example\Support;
+
+use Example\Example;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -13,23 +15,28 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected $defer = true;
 
+    public function connection($app)
+    {
+        return new Example($app);
+    }
+
     /**
      * 在容器中注册绑定。
      */
     public function register(): void
     {
-        $configPath = __DIR__.'/../../config/config-file.php';
+        $configPath = __DIR__.'/../../../config/config-file.php';
         $this->mergeConfigFrom($configPath, 'config-file');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
         // $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
         // $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
-        $this->app->singleton(Example::class, function (): void {
-            return;
+        $this->app->singleton('example', function ($app) {
+            return $this->connection($app);
         });
 
-        $this->app->alias(Example::class, 'example');
-        //        $this->app->bind(Example::class, function () {
-        //            return ;
+        $this->app->alias('example', Example::class);
+        //        $this->app->bind('example', function () {
+        //            return new Example();
         //        });
     }
 
@@ -38,7 +45,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot(): void
     {
-        $configPath = __DIR__.'/../../config/config-file.php';
+        $configPath = __DIR__.'/../../../config/config-file.php';
         $this->publishes([$configPath => $this->getConfigPath()], 'config');
         // $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'courier');
         // $this->publishes([
@@ -48,11 +55,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         // $this->publishes([
         //    __DIR__.'/path/to/views' => resource_path('views/vendor/courier'),
         // ]);
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Console\ExampleCommand::class,
-            ]);
-        }
+        // if ($this->app->runningInConsole()) {
+        //    $this->commands([
+        //        Console\ExampleCommand::class,
+        //    ]);
+        // }
         // $this->publishes([
         //     __DIR__.'/path/to/assets' => public_path('vendor/courier'),
         // ], 'public');
@@ -75,6 +82,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function provides()
     {
-        return [Example::class];
+        return ['example'];
     }
 }

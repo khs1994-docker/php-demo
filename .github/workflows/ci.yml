@@ -25,16 +25,18 @@ jobs:
       - name: install
         uses: docker://khs1994/php:7.2.21-composer-alpine
         with:
-          args: bash -c "php .pcit.php ; composer install -q --ignore-platform-reqs"
+          args: |
+            bash -c "php .pcit.php \
+            ; composer install -q --ignore-platform-reqs"
       - name: script
         uses: docker://khs1994/php:7.2.21-fpm-alpine
         env:
           PHP_VERSION: ${{ matrix.php }}
         with:
           args: |
-            bash -c "mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini
-            ; echo ${PHP_VERSION}
-            ; sleep 30
+            bash -c "mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini \
+            ; echo ${PHP_VERSION} \
+            ; sleep 30 \
             ; composer test:coverage"
       - name: after_success
         env:
@@ -63,4 +65,4 @@ jobs:
           MYSQL_ROOT_PASSWORD: mytest
         volumes:
           - mysql-data:/var/lib/mysql
-        options: --cpus 1
+        options: --cpus 1 -v mysql-data:/var/lib/mysql

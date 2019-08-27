@@ -35,12 +35,12 @@ jobs:
             bash -c "mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini
             ; echo ${PHP_VERSION}
             ; sleep 30
-            ; mysql -uroot -pmytest -e \"show databases\"
             ; composer test:coverage"
       - name: after_success
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
+          mysql -uroot -pmytest -P 13306 -e "show databases"
           bash <(curl -s https://codecov.io/bash)
         if: success()
       - name: after_failure
@@ -57,7 +57,7 @@ jobs:
       mysql:
         image: mysql:8.0.11
         ports:
-          - 3306:3306
+          - 13306:3306
         env:
           MYSQL_DATABASE: test
           MYSQL_ROOT_PASSWORD: mytest

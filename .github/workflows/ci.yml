@@ -24,16 +24,16 @@ jobs:
           fetch-depth: 2
       - name: install
         uses: docker://khs1994/php:7.2.21-composer-alpine
-        run: |
-          php .pcit.php
-          composer install -q --ignore-platform-reqs
+        with:
+          args: bash -c "php .pcit.php ; composer install -q --ignore-platform-reqs"
       - name: script
         uses: docker://khs1994/php:${{ matrix.php }}-fpm-alpine
-        run: |
-          mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini
-          sleep 30
-          mysql -uroot -pmytest -e "show databases"
-          composer test:coverage
+        with:
+          args: |
+            bash -c "mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini
+            ; sleep 30
+            ; mysql -uroot -pmytest -e \"show databases\"
+            ; composer test:coverage"
       - name: after_success
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

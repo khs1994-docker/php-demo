@@ -26,14 +26,16 @@ jobs:
         uses: docker://khs1994/php:7.2.21-composer-alpine
         with:
           args: |
-            bash -c "php .pcit.php \
+            bash -c "set -x ; \
+            php .pcit.php \
             ; composer install -q --ignore-platform-reqs"
       - name: script
         uses: khs1994-docker/actions-setup-php@master
         with:
           php_version: ${{ matrix.php_version }}
           args: |
-            mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.default \
+            set -x \
+            ; mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.default \
                     /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
             ; php -v \
             ; env \
@@ -43,7 +45,9 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
+          docker network ls
           sudo docker ps -a
+          mysql --version
           mysql -uroot -pmytest -P 13306 -e "show databases"
           bash <(curl -s https://codecov.io/bash)
         if: success()
@@ -59,7 +63,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:8.0.11
+        image: mysql:8.0.17
         ports:
           - 13306:3306
         env:

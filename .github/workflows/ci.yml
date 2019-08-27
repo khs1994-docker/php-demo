@@ -33,7 +33,8 @@ jobs:
         with:
           php_version: ${{ matrix.php_version }}
           args: |
-            bash -c "mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini \
+            bash -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.default \
+                    /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
             ; php -v \
             ; env \
             ; sleep 30 \

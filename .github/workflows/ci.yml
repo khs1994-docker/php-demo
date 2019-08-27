@@ -29,13 +29,14 @@ jobs:
             bash -c "php .pcit.php \
             ; composer install -q --ignore-platform-reqs"
       - name: script
-        uses: docker://khs1994/php:7.2.21-fpm-alpine
+        uses: docker://khs1994/php:7.2.21-composer-alpine
         env:
           PHP_VERSION: ${{ matrix.php }}
         with:
           args: |
             bash -c "mv ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini.default ${PHP_INI_DIR}/conf.d/docker-php-ext-xdebug.ini \
             ; echo ${PHP_VERSION} \
+            ; env \
             ; sleep 30 \
             ; composer test:coverage"
       - name: after_success

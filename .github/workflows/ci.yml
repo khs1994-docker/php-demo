@@ -22,12 +22,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 2
-      - name: fetch cache
-        continue-on-error: true
-        uses: actions/download-artifact@master
-        with:
-          name: composer-cache
-          path: vendor
       - name: install
         uses: khs1994-docker/actions-setup-php@master
         with:
@@ -35,6 +29,7 @@ jobs:
           args: |
             ls -la vendor || true
             php .pcit.php
+            composer config -g --unset repos.packagist
             composer install -q --ignore-platform-reqs
       - name: script
         uses: khs1994-docker/actions-setup-php@master
@@ -55,14 +50,15 @@ jobs:
         with:
           php_type: composer
           args: |
-            php-cs-fixer
+            php-cs-fixer fix
       - name: after_success
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          PHP_VERSION: ${{ matrix.php_version }}
         run: |
           set -x
           mysql -uroot --password=mytest -h 127.0.0.1 -P 13306 -e "show databases"
-          bash <(curl -s https://codecov.io/bash)
+          bash <(curl -s https://codecov.io/bash) -e PHP_VERSION
         if: success()
       - name: after_failure
         run: echo "build error"
@@ -78,11 +74,6 @@ jobs:
           docker logs `docker ps -a --filter "name=redis" -q`
         if: always()
         working-directory: /
-      - name: upload cache
-        uses: actions/upload-artifact@master
-        with:
-          name: composer-cache
-          path: vendor
     services:
       mysql:
         image: mysql:5.7.27

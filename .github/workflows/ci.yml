@@ -22,11 +22,16 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 2
+      - name: fetch cache
+        uses: actions/download-artifact@master
+        with:
+          name: composer-cache
       - name: install
         uses: khs1994-docker/actions-setup-php@master
         with:
           php_type: composer
           args: |
+            ls -la vendor || true
             php .pcit.php
             composer install -q --ignore-platform-reqs
       - name: script
@@ -65,7 +70,11 @@ jobs:
           docker logs `docker ps -a --filter "name=redis" -q`
         if: always()
         working-directory: /
-
+      - name: upload cache
+        uses: actions/download-artifact@master
+        with:
+          name: composer-cache
+          path: vendor
     services:
       mysql:
         image: mysql:5.7.27

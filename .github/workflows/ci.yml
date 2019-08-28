@@ -22,17 +22,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 2
-      - name: system info
-        run: |
-          set -x
-          echo $PATH
-          docker version
-          docker network ls | grep github
-          docker ps -a
-          mysql --version
-          php7.1 -v || true
-          php7.2 -v || true
-          php7.3 -v || true
       - name: install
         uses: docker://khs1994/php:7.2.21-composer-alpine
         with:

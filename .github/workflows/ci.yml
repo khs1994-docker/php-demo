@@ -22,13 +22,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 2
-      - name: install
-        uses: docker://khs1994/php:7.2.21-composer-alpine
-        with:
-          args: |
-            bash -c "set -x ; \
-            php .pcit.php \
-            ; composer install -q --ignore-platform-reqs"
       - name: script
         uses: khs1994-docker/actions-setup-php@master
         with:
@@ -48,7 +41,8 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           set -x
-          mysql -uroot -pmytest -P 13306 -e "show databases"
+          mysql -uroot --password=mytest -h 127.0.0.1 -P 13306 -e "show databases"
+          bash -xc 'mysql -uroot --password=mytest -h 127.0.0.1 -P 13306 -e "show databases"'
           bash <(curl -s https://codecov.io/bash)
         if: success()
       - name: after_failure
@@ -74,7 +68,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: mytest
         volumes:
           - mysql-data:/var/lib/mysql
-        options: -v mysql-data:/var/lib/mysql --restart always --workdir /var/lib/mysql
+        options: -v mysql-data:/var/lib/mysql --restart always --privileged
 
       redis:
         image: redis:5.0.5-alpine

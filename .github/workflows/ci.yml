@@ -28,12 +28,14 @@ jobs:
           args: |
             bash -c "set -x ; \
             php .pcit.php \
+            ; ping mysql -c 4 || true \
+            ; ping redis -c 4 || true \
             ; composer install -q --ignore-platform-reqs"
       - name: test docker
         run: |
           docker network create test
-          docker run -it -d --network test --network-alias nginx nginx:1.17.3-alpine
-          docker run -it --network test --rm busybox ping nginx -c 4
+          docker run -d --network test --network-alias nginx nginx:1.17.3-alpine
+          docker run --network test --rm busybox ping nginx -c 4
       - name: script
         uses: khs1994-docker/actions-setup-php@master
         with:
@@ -45,8 +47,9 @@ jobs:
             env
             sleep 30
             cat /etc/resolv.conf
-            ping mysql -c 4
-            ping redis -c 4
+            ip addr
+            ping mysql -c 4 || true
+            ping redis -c 4 || true
             php -r "var_dump(new PDO('mysql:host=mysql;dbname=test','root','mytest'));"
             vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: after_success

@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         php_version: ["7.2.21","7.3.8"]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     # needs: job
     steps:
       - uses: actions/checkout@master
@@ -39,6 +39,7 @@ jobs:
             php -v
             env
             sleep 30
+            cat /etc/resolv.conf
             ping mysql -c 4
             ping redis -c 4
             php -r "var_dump(new PDO('mysql:host=mysql;dbname=test','root','mytest'));"

@@ -22,47 +22,45 @@ jobs:
       - uses: actions/checkout@master
         with:
           fetch-depth: 2
-      # - name: install
-      #   uses: docker://khs1994/php:7.2.21-composer-alpine
-      #   with:
-      #     args: |
-      #       bash -c "set -x ; \
-      #       php .pcit.php \
-      #       ; composer install -q --ignore-platform-reqs"
-      # - name: script
-      #   uses: khs1994-docker/actions-setup-php@master
-      #   with:
-      #     php_version: ${{ matrix.php_version }}
-      #     args: |
-      #       mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.default \
-      #               /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini || true
-      #       php -v
-      #       env
-      #       sleep 30
-      #       cat /etc/resolv.conf
-      #       ip addr
-      #       ping mysql -c 4 || true
-      #       ping redis -c 4 || true
-      #       vendor/bin/phpunit --coverage-clover=coverage.xml
-      # - name: after_success
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      #   run: |
-      #     set -x
-      #     bash <(curl -s https://codecov.io/bash)
-      #   if: success()
-      # - name: after_failure
-      #   run: echo "build error"
-      #   if: failure()
+      - name: install
+        uses: docker://khs1994/php:7.2.21-composer-alpine
+        with:
+          args: |
+            bash -c "set -x ; \
+            php .pcit.php \
+            ; composer install -q --ignore-platform-reqs"
+      - name: script
+        uses: khs1994-docker/actions-setup-php@master
+        with:
+          php_version: ${{ matrix.php_version }}
+          args: |
+            mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini.default \
+                    /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini || true
+            php -v
+            env
+            sleep 30
+            ping mysql -c 4 || true
+            ping redis -c 4 || true
+            php -r "var_dump(new PDO('mysql:host=mysql;dbname=test','root','mytest'));"
+            vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: after_success
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          set -x
+          mysql -uroot -pmytest -P 13306 -e "show databases"
+          bash <(curl -s https://codecov.io/bash)
+        if: success()
+      - name: after_failure
+        run: echo "build error"
+        if: failure()
       - name: always
         run: |
           set -x
           echo "run always"
           pwd
-          sleep 30
           docker logs `docker ps -a --filter "name=mysql" -q`
-          docker run -i --rm --network host mysql:8.0.17 \
-            mysql -uroot -pmytest -P 13306 -e "show databases"
+          docker logs `docker ps -a --filter "name=redis" -q`
         if: always()
         working-directory: /
 

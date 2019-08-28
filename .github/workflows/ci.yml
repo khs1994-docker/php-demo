@@ -23,6 +23,7 @@ jobs:
         with:
           fetch-depth: 2
       - name: fetch cache
+        continue-on-error: true
         uses: actions/download-artifact@master
         with:
           name: composer-cache

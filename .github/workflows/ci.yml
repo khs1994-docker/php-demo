@@ -39,6 +39,8 @@ jobs:
             php -v
             env
             sleep 30
+            ping mysql -c 4
+            ping redis -c 4
             php -r "var_dump(new PDO('mysql:host=mysql;dbname=test','root','mytest'));"
             vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: after_success
@@ -46,7 +48,9 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           set -x
-          mysql -uroot -pmytest -P 13306 -e "show databases"
+          docker ps -a
+          docker run -it --rm --network host mysql:8.0.17 \
+            mysql -uroot -pmytest -P 13306 -e "show databases"
           bash <(curl -s https://codecov.io/bash)
         if: success()
       - name: after_failure
@@ -68,9 +72,9 @@ jobs:
         env:
           MYSQL_DATABASE: test
           MYSQL_ROOT_PASSWORD: mytest
-        volumes:
-          - mysql-data:/var/lib/mysql
-        options: --cpus 1 -v mysql-data:/var/lib/mysql
+        # volumes:
+        #   - mysql-data:/var/lib/mysql
+        # options: -v mysql-data:/var/lib/mysql
 
       redis:
         image: redis:5.0.5-alpine

@@ -61,7 +61,7 @@ jobs:
           pwd
           sleep 30
           docker logs `docker ps -a --filter "name=mysql" -q`
-          docker run -it --rm --network host mysql:8.0.17 \
+          docker run -i --rm --network host mysql:8.0.17 \
             mysql -uroot -pmytest -P 13306 -e "show databases"
         if: always()
         working-directory: /
@@ -74,9 +74,9 @@ jobs:
         env:
           MYSQL_DATABASE: test
           MYSQL_ROOT_PASSWORD: mytest
-        # volumes:
-        #   - mysql-data:/var/lib/mysql
-        # options: -v mysql-data:/var/lib/mysql
+        volumes:
+          - mysql-data:/var/lib/mysql
+        options: -v mysql-data:/var/lib/mysql --restart always --workdir /var/lib/mysql
 
       redis:
         image: redis:5.0.5-alpine

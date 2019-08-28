@@ -29,6 +29,11 @@ jobs:
             bash -c "set -x ; \
             php .pcit.php \
             ; composer install -q --ignore-platform-reqs"
+      - name: test docker
+        run: |
+          docker network create test
+          docker run -it -d --network test --network-alias nginx nginx:1.17.3-alpine
+          docker run -it --network test --rm busybox ping nginx -c 4
       - name: script
         uses: khs1994-docker/actions-setup-php@master
         with:

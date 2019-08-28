@@ -39,6 +39,7 @@ jobs:
             php -v
             env
             sleep 30
+            php -r "var_dump(new PDO('mysql:host=mysql;dbname=test','root','mytest'));"
             vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: after_success
         env:

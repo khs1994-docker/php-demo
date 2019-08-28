@@ -50,6 +50,12 @@ jobs:
             ping redis -c 4 || true
             php -r "var_dump(new PDO('mysql:host=mysql;dbname=test','root','mytest'));"
             vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: php-cs-fixer
+        uses: khs1994-docker/actions-setup-php@master
+        with:
+          php_type: composer
+          args: |
+            php-cs-fixer
       - name: after_success
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

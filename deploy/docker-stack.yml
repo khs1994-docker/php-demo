@@ -28,8 +28,8 @@ services:
         delay: 10s
         order: stop-first
       labels:
-        - "com.khs1994.lnmp.demo=true"
-        - "com.khs1994.lnmp.demo.nginx=true"
+        - "lnmp.khs1994.com.demo=true"
+        - "lnmp.khs1994.com.demo.nginx=true"
     configs:
       - source: nginx-conf
         target: /etc/nginx/nginx.conf
@@ -64,8 +64,8 @@ services:
         delay: 10s
         order: stop-first
       labels:
-        - "com.khs1994.lnmp.demo=true"
-        - "com.khs1994.lnmp.demo.php7=true"
+        - "lnmp.khs1994.com.demo=true"
+        - "lnmp.khs1994.com.demo.php7=true"
     configs:
       - source: php-ini
         target: /usr/local/etc/php.ini
@@ -75,12 +75,12 @@ services:
 networks:
   backend:
     labels:
-      - "com.khs1994.lnmp.demo=true"
-      - "com.khs1994.lnmp.demo.backend=true"
+      - "lnmp.khs1994.com.demo=true"
+      - "lnmp.khs1994.com.demo.backend=true"
   frontend:
     labels:
-      - "com.khs1994.lnmp.demo=true"
-      - "com.khs1994.lnmp.demo.frontend=true"
+      - "lnmp.khs1994.com.demo=true"
+      - "lnmp.khs1994.com.demo.frontend=true"
 #
 # $ git clone -b config git@github.com:khs1994-docker/php-demo.git ../demo-config
 #

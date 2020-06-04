@@ -4,7 +4,9 @@
   "name": "php-demo",
 
   // The order of the files is important since later files override previous ones
-  "dockerComposeFile": ["../docker-workspace.yml"],
+  "dockerComposeFile": [
+    "../docker-workspace.yml"
+  ],
 
   // fix me
   "service": "workspace",
@@ -18,7 +20,8 @@
   // [Optional] If you are using SSH keys w/Git, copy them and set correct permissions
   // "postCreateCommand": "mkdir -p ~/.ssh && cp -r ~/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*"
   "extensions": [
-    "felixfbecker.php-pack"
+    "felixfbecker.php-pack",
+    "editorconfig.editorconfig"
   ],
   "settings": {
     // If you are using an Alpine-based image, change this to /bin/ash

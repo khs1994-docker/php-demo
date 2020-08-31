@@ -197,7 +197,7 @@ steps:
 
 services:
   - name: mysql
-    image: mysql:5.7.22
+    image: mysql:5.7.31
     environment:
       MYSQL_DATABASE: test
       MYSQL_ROOT_PASSWORD: mytest
